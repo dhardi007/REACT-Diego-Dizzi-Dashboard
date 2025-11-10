@@ -1,0 +1,3 @@
+[submodule "windmill-dashboard"]
+	path = windmill-dashboard
+	url = https://github.com/estevanmaito/windmill-dashboard
