@@ -1,4 +1,4 @@
-# 📌 Testimonios freeCodeCamp (Componentes de Clase)
+# 📌 Dizzi Dashboard (Componentes de React)
 
 ¡Hola! Esta es una aplicación desarrollada con React, un clon de la sección de testimonios, calculadora, contador recreadas por mi, en un solo proyecto. Personalmente fue estresante crear esta aplicación, ya que no tenía una idea de cómo se podría estructurar el código y me resultaba difícil de seguir, pero ahi resolvi. 🥷
 
