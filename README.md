@@ -3,7 +3,7 @@
 Hice uso de react-router-dom para enlazar proyectos.
 https://youtu.be/AXzuRJhAu_s?si=V1xwPuRQEJBvMCWj
 
-Para más detalles sobre la configuración, consulta el [README del proyecto original](https://github.com/usuario/proyecto/blob/main/README.md).
+Para más detalles sobre la configuración, consulta el [README del react-router](https://github.com/remix-run/react-router#readme).
 
 ¡Hola! Esta es una aplicación desarrollada con React, un clon de la sección de testimonios, calculadora, contador, TO DO LIST, recreadas por mi, en un solo proyecto. Personalmente fue estresante crear esta aplicación, ya que no tenía una idea de cómo se podría estructurar el código y me resultaba difícil de seguir, pero ahi resolvi. 🥷
 
