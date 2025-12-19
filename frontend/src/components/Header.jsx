@@ -1,8 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-
 function Header({ dark, toggleTheme }) {
-    const location = useLocation();
 
     // Map routes to titles (kept for future use or reference, but variable removed to fix lint)
     // const pageTitles = { ... };
