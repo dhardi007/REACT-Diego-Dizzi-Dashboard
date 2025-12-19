@@ -1,12 +1,10 @@
+import React from 'react';
+import '../hojas-de-estilo/Boton.css';
 
 function Boton({ texto, esBotonDeClic, manejarClic }) {
   return (
     <button
-      className={`px-8 py-4 m-2 font-bold text-xl text-white rounded-full transition-all transform active:scale-95 hover:shadow-2xl ${
-        esBotonDeClic
-          ? 'bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 shadow-purple-500/40 ring-2 ring-purple-400/20'
-          : 'bg-linear-to-r from-green-500 to-teal-500 hover:from-green-400 hover:to-teal-400 shadow-green-500/40 ring-2 ring-green-400/20'
-      }`}
+      className={esBotonDeClic ? 'boton-clic' : 'boton-reiniciar'}
       onClick={manejarClic}>
       {texto}
     </button>

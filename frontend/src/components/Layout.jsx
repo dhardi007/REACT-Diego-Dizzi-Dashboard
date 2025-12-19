@@ -60,7 +60,7 @@ function Layout() {
   return (
     <div className={`flex h-screen bg-gray-50 dark:bg-gray-900 ${dark ? 'dark' : ''}`}>
       {/* Desktop Sidebar */}
-      <aside className="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block shrink-0 shadow-md">
+      <aside className="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 lg:block shrink-0 shadow-md">
         <div className="py-4 text-gray-500 dark:text-gray-400">
           <Link
             to="/"
@@ -115,7 +115,7 @@ function Layout() {
 
       {/* Mobile Sidebar */}
       <aside
-        className={`fixed inset-y-0 z-20 shrink-0 w-64 mt-0 overflow-y-auto bg-white dark:bg-gray-800 md:hidden transition-transform duration-150 ${
+        className={`fixed inset-y-0 z-20 shrink-0 w-64 mt-0 overflow-y-auto bg-white dark:bg-gray-800 lg:hidden transition-transform duration-150 ${
           isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -173,7 +173,7 @@ function Layout() {
             Actually, let's keep a floating button for mobile if Header doesn't cover it well,
             OR integrate it into Header. For now, bringing back the floating button but styled better. */}
         <button
-          className="md:hidden fixed top-3 left-3 z-30 p-2 rounded-md bg-purple-600 text-white shadow-lg focus:outline-none"
+          className="lg:hidden fixed top-3 left-3 z-30 p-2 rounded-md bg-purple-600 text-white shadow-lg focus:outline-none"
           onClick={() => setIsSideMenuOpen(!isSideMenuOpen)}
           aria-label="Menu"
         >
