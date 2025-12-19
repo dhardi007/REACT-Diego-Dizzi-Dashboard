@@ -24,7 +24,7 @@ function PageContador() {
         />
       </div>
 
-      <div className="flex flex-col items-center bg-white dark:bg-gray-800 p-10 rounded-3xl shadow-2xl border border-gray-100 dark:border-gray-700 w-full max-w-md relative overflow-hidden group hover:shadow-purple-500/10 transition-shadow duration-500">
+      <div className="flex flex-col items-center bg-gray-800/80 p-10 rounded-[3rem] shadow-2xl border border-gray-600/50 w-full max-w-md relative overflow-hidden group hover:shadow-purple-500/20 transition-all duration-500 backdrop-blur-xl ring-1 ring-white/10">
 
         {/* Backlight effect */}
         <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-purple-500/5 group-hover:to-purple-500/10 transition-colors duration-500"></div>

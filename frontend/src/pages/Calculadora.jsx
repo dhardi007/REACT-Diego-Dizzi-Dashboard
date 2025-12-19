@@ -35,11 +35,11 @@ function Calculadora() {
       </div>
 
       {/* Calculator Container with Glassmorphism/Premium feel */}
-      <div className="w-full max-w-sm bg-gray-900 rounded-4xl p-6 shadow-2xl border-4 border-gray-800 relative overflow-hidden ring-4 ring-purple-500/20 backdrop-blur-sm">
+      <div className="w-full max-w-sm bg-gray-800/80 rounded-[3rem] p-6 shadow-2xl border border-gray-600/50 relative overflow-hidden ring-1 ring-white/10 backdrop-blur-xl">
 
         {/* Decorative background element */}
-        <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-purple-600 rounded-full blur-xl opacity-20"></div>
-        <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-24 h-24 bg-blue-600 rounded-full blur-xl opacity-20"></div>
+        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-48 h-48 bg-purple-500 rounded-full blur-[80px] opacity-20"></div>
+        <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-48 h-48 bg-blue-500 rounded-full blur-[80px] opacity-20"></div>
 
         <Pantalla input={input} />
 
