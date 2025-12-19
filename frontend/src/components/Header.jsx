@@ -1,19 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 function Header({ dark, toggleTheme }) {
     const location = useLocation();
 
-    // Map routes to titles
-    const pageTitles = {
-        '/': 'Dashboard',
-        '/calculadora': 'Calculadora Premium',
-        '/contador': 'Contador Interactivo',
-        '/testimonios': 'Testimonios de Clientes',
-        '/tareas': 'Gestor de Tareas',
-    };
-
-    const currentTitle = pageTitles[location.pathname] || 'Dashboard';
+    // Map routes to titles (kept for future use or reference, but variable removed to fix lint)
+    // const pageTitles = { ... };
+    // const currentTitle = pageTitles[location.pathname] || 'Dashboard';
 
     return (
         <header className="z-10 py-4 bg-white shadow-md dark:bg-gray-800 transition-colors duration-300">
