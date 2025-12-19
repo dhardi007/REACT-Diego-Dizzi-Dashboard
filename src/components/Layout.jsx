@@ -121,19 +121,6 @@ function Layout() {
         {isSideMenuOpen && (
           <div
             className="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"
-            onClick={() => setIsSideMenuOpen(false)}
-          />
-        )}
-
-        {/* Mobile Sidebar */}
-        <aside
-          className={`fixed inset-y-0 z-20 shrink-0 w-64 mt-16 overflow-y-auto bg-white dark:bg-gray-800 md:hidden transition-transform duration-150 ${
-            isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
-        >
-          <div className="py-4 text-gray-500 dark:text-gray-400">
-            <Link
-              to="/"
               className="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
             >
               Diego Proyecto
