@@ -1,5 +1,7 @@
 // src/App.jsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Dashboard from './pages/Dashboard';
 import Testimonios from './pages/Testimonios';
 import Contador from './pages/Contador';
 import Calculadora from './pages/Calculadora';
@@ -9,10 +11,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/testimonios" element={<Testimonios />} />
-        <Route path="/contador" element={<Contador />} />
-        <Route path="/calculadora" element={<Calculadora />} />
-        <Route path="/tareas" element={<Tareas />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="testimonios" element={<Testimonios />} />
+          <Route path="contador" element={<Contador />} />
+          <Route path="calculadora" element={<Calculadora />} />
+          <Route path="tareas" element={<Tareas />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

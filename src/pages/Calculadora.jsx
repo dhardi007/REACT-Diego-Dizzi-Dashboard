@@ -1,4 +1,3 @@
-import "./Calculadora.css";
 import freeCodeCampLogo from "../imagenes/freecodecamp-logo.png";
 import Boton from "../componentes/calculadora/Boton";
 import Pantalla from "../componentes/calculadora/Pantalla";
@@ -15,48 +14,58 @@ function Calculadora() {
 
   const calcularResultado = () => {
     if (input) {
-      setInput(evaluate(input));
+      try {
+        setInput(evaluate(input));
+      } catch (error) {
+        alert("Expresión inválida");
+      }
     } else {
       alert("Por favor ingrese valores para realizar los cálculos.");
     }
   };
 
   return (
-    <div className="App">
-      <div className="freecodecamp-logo-contenedor">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] w-full p-4 animate-fade-in-down">
+      <div className="mb-8 transform hover:scale-105 transition-transform duration-300">
         <img
           src={freeCodeCampLogo}
-          className="freecodecamp-logo"
+          className="h-16 w-auto object-contain brightness-0 dark:brightness-200 drop-shadow-md"
           alt="Logo de freeCodeCamp"
         />
       </div>
-      <div className="contenedor-calculadora">
+
+      {/* Calculator Container with Glassmorphism/Premium feel */}
+      <div className="w-full max-w-sm bg-gray-900 rounded-4xl p-6 shadow-2xl border-4 border-gray-800 relative overflow-hidden ring-4 ring-purple-500/20 backdrop-blur-sm">
+
+        {/* Decorative background element */}
+        <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-purple-600 rounded-full blur-xl opacity-20"></div>
+        <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-24 h-24 bg-blue-600 rounded-full blur-xl opacity-20"></div>
+
         <Pantalla input={input} />
-        <div className="fila">
+
+        <div className="grid grid-cols-4 gap-3 mt-4 relative z-10">
           <Boton manejarClic={agregarInput}>1</Boton>
           <Boton manejarClic={agregarInput}>2</Boton>
           <Boton manejarClic={agregarInput}>3</Boton>
           <Boton manejarClic={agregarInput}>+</Boton>
-        </div>
-        <div className="fila">
+
           <Boton manejarClic={agregarInput}>4</Boton>
           <Boton manejarClic={agregarInput}>5</Boton>
           <Boton manejarClic={agregarInput}>6</Boton>
           <Boton manejarClic={agregarInput}>-</Boton>
-        </div>
-        <div className="fila">
+
           <Boton manejarClic={agregarInput}>7</Boton>
           <Boton manejarClic={agregarInput}>8</Boton>
           <Boton manejarClic={agregarInput}>9</Boton>
           <Boton manejarClic={agregarInput}>*</Boton>
-        </div>
-        <div className="fila">
+
           <Boton manejarClic={calcularResultado}>=</Boton>
           <Boton manejarClic={agregarInput}>0</Boton>
           <Boton manejarClic={agregarInput}>.</Boton>
           <Boton manejarClic={agregarInput}>/</Boton>
         </div>
-        <div className="fila">
+
+        <div className="mt-4 relative z-10">
           <BotonClear manejarClear={() => setInput("")}>Clear</BotonClear>
         </div>
       </div>
