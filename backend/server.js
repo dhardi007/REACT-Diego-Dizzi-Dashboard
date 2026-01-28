@@ -17,14 +17,23 @@ const pool = new Pool({
     port: process.env.DB_PORT,
 });
 
+// Hacer pool accesible para las rutas
+app.locals.pool = pool;
+
 // Verificar conexión a la base de datos
 pool.connect()
     .then(() => console.log('✅ Conectado exitosamente a la base de datos PostgreSQL'))
     .catch(err => console.error('❌ Error de conexión a la base de datos', err.stack));
 
+// Importar rutas
+const authRoutes = require('./routes/auth');
+
 app.get('/', (req, res) => {
     res.send('API Backend con Base de Datos funcionando 🚀');
 });
+
+// Rutas de autenticación
+app.use('/api/auth', authRoutes);
 
 // Endpoint de ejemplo con DB
 app.get('/api/test-db', async (req, res) => {
@@ -47,7 +56,7 @@ app.get('/api/stats', (req, res) => {
     });
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en puerto ${PORT}`);
+    console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
 });
