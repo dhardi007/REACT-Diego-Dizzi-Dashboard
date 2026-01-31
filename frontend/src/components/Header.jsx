@@ -15,9 +15,9 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
   return (
     <header className="z-10 py-4 bg-white dark:bg-gray-800 shadow-md">
       <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
-        {/* Mobile hamburger - Only visible on mobile */}
+        {/* Mobile hamburger - visible < 768px */}
         <button
-          className="p-1 mr-5 -ml-1 rounded-md lg:hidden focus:outline-none focus:shadow-outline-purple"
+          className="header-icon-btn md:hidden mr-5 -ml-1"
           onClick={toggleSideMenu}
           aria-label="Menu"
         >
@@ -26,12 +26,12 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
 
         {/* Search Bar */}
         <div className="flex justify-center flex-1 lg:mr-32">
-          <div className="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
-            <div className="absolute inset-y-0 flex items-center pl-2">
-              <Search className="w-4 h-4" />
+          <div className="relative w-full max-w-xl mr-6">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3">
+              <Search className="w-4 h-4 text-gray-400" />
             </div>
             <input
-              className="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+              className="w-full py-2 pl-10 pr-4 text-sm text-gray-700 bg-transparent border-0 rounded-md dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none"
               type="text"
               placeholder="Search for projects"
               aria-label="Search"
@@ -39,11 +39,12 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
           </div>
         </div>
 
-        <ul className="flex items-center flex-shrink-0 space-x-6">
+        {/* Right side icons - Estilo minimalista Windmill */}
+        <ul className="flex items-center space-x-4">
           {/* Theme Toggle */}
-          <li className="flex">
+          <li>
             <button
-              className="rounded-full focus:shadow-outline-purple focus:outline-none"
+              className="header-icon-btn"
               onClick={toggleTheme}
               aria-label="Toggle color mode"
             >
@@ -58,26 +59,26 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
           {/* Notifications */}
           <li className="relative">
             <button
-              className="relative align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
+              className="header-icon-btn"
               aria-label="Notifications"
             >
               <Bell className="w-5 h-5" />
               <span
                 aria-hidden="true"
-                className="absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800"
+                className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"
               ></span>
             </button>
           </li>
 
-          {/* Profile Menu */}
-          <li className="relative">
+          {/* Profile */}
+          <li>
             <button
-              className="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
+              className="header-icon-btn"
               aria-label="Account"
             >
               {user ? (
-                <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-semibold text-sm">
-                  {user.name?.charAt(0).toUpperCase() || 'U'}
+                <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-medium text-sm">
+                  {user.name?.charAt(0).toUpperCase() || 'D'}
                 </div>
               ) : (
                 <User className="w-5 h-5" />
@@ -89,7 +90,7 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
           <li>
             <button
               onClick={handleLogout}
-              className="rounded-full focus:shadow-outline-purple focus:outline-none"
+              className="header-icon-btn"
               aria-label="Logout"
             >
               <LogOut className="w-5 h-5" />
