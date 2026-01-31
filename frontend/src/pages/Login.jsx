@@ -72,7 +72,7 @@ function Login() {
 
         {/* Right side - Login Form */}
         <div className="w-full max-w-md mx-auto">
-          <div className="bg-black/30 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/10 p-8 animate-scale-in">
+          <div className="bg-black/30 backdrop-blur-2xl rounded-3xl shadow-2xl p-8 animate-scale-in">
             {/* Mobile Logo */}
             <div className="lg:hidden flex flex-col items-center mb-6">
                <img src={LOGO_PATH} alt="Logo" className="w-12 h-12 mb-4 drop-shadow-lg" />
@@ -96,7 +96,7 @@ function Login() {
             <div className="flex items-center justify-center gap-3 mb-4">
               <button
                 onClick={() => handleOAuthLogin('Google')}
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-white hover:bg-[#f4f5f7] text-gray-900 font-semibold rounded-lg shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-95 text-sm"
+                className="btn-ripple flex-1 flex items-center justify-center gap-2 py-2.5 bg-white hover:bg-[#F4F5F7] text-gray-900 hover:text-gray-700 font-semibold rounded-lg shadow-sm hover:shadow-md transition-all duration-200 hover:scale-[1.02] active:scale-95 text-sm"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -109,20 +109,15 @@ function Login() {
 
               <button
                 onClick={() => handleOAuthLogin('GitHub')}
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[#24292e] hover:bg-[#2f363d] text-white font-semibold rounded-lg shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-95 border border-white/10 text-sm"
+                className="btn-ripple flex-1 flex items-center justify-center gap-2 py-2.5 bg-[#24292e] hover:bg-[#2f363d] text-white hover:text-gray-200 font-semibold rounded-lg shadow-sm hover:shadow-md transition-all duration-200 hover:scale-[1.02] active:scale-95 border border-white/10 text-sm"
               >
                 <Github className="w-4 h-4" />
                 <span>GitHub</span>
               </button>
             </div>
 
-            <div className="relative mb-3">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-white/10"></div>
-              </div>
-              <div className="relative flex justify-center text-xs">
-                <span className="px-2 text-gray-500 bg-transparent">O usa tu email</span>
-              </div>
+            <div className="text-center mb-3">
+              <span className="text-sm text-gray-400">O usa tu email</span>
             </div>
 
             {/* Form */}
@@ -164,7 +159,7 @@ function Login() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 mt-6 bg-white/10 hover:bg-[#262331] border border-white/10 text-white font-bold rounded-lg shadow-lg hover:shadow-purple-500/25 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                className="btn-ripple w-full flex items-center justify-center gap-2 py-3 px-4 mt-6 bg-white/10 hover:bg-[#262331] border border-white/10 text-white hover:text-purple-200 font-bold rounded-lg shadow-md hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
               >
                 {isLoading ? (
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

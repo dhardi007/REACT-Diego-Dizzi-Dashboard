@@ -60,6 +60,12 @@ export const AuthProvider = ({ children }) => {
     setError(null);
     setLoading(true);
 
+    // Demo mode credentials
+    const DEMO_CREDENTIALS = {
+      email: 'admin@dashboard.com',
+      password: 'admin123'
+    };
+
     try {
       const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
@@ -81,6 +87,23 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
       return { success: true };
     } catch (err) {
+      // Fallback to demo mode if backend is unavailable
+      if (email === DEMO_CREDENTIALS.email && password === DEMO_CREDENTIALS.password) {
+        const demoToken = 'demo-token-' + Date.now();
+        const demoUser = {
+          id: 1,
+          name: 'Diego Dizzi',
+          email: 'admin@dashboard.com',
+          role: 'admin'
+        };
+
+        localStorage.setItem('token', demoToken);
+        setToken(demoToken);
+        setUser(demoUser);
+        setLoading(false);
+        return { success: true };
+      }
+
       setError(err.message);
       setLoading(false);
       return { success: false, error: err.message };
