@@ -20,13 +20,7 @@ h2 {
   font-variation-settings: "wdth" 100;
 }
 
-p,
-div {
-  font-family: "Roboto", sans-serif, monospace;
-  font-size: 1.5rem;
-  font-weight: 400;
-  font-style: normal;
-}
+/* Removed global p, div, and header styles that conflict with Tailwind */
 
 a {
   color: rgb(172, 155, 132);
@@ -35,18 +29,6 @@ a {
 
 a:hover {
   color: rgb(148, 169, 187);
-}
-header,
-#titulo {
-  position: relative;
-  text-align: center;
-}
-
-footer {
-  background-color: rgb(37, 41, 41);
-  padding: 2px;
-  margin-top: 40px;
-  align-content: space-around;
 }
 
 #titulo:hover {

@@ -13,16 +13,23 @@
   margin: 4px;
   cursor: pointer;
   user-select: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .boton-contenedor:hover {
   background-color: #5a01a7;
+  transform: scale(1.05);
+}
+
+.boton-contenedor:active {
+  transform: scale(0.95);
 }
 
 .operador {
-  background-color: #1B1B32;
+  background-color: #00471b;
 }
 
 .operador:hover {
-  background-color: #ff6600;
+  background-color: #006b28;
 }

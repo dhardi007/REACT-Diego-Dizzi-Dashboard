@@ -10,6 +10,11 @@
   background-color: #0a0a23;
   color: white;
   padding: 11px 30px 11px 11px;
-  margin: 1px solid #888;
+  border: 1px solid #888;
   box-shadow: -1px 4px 1px 1px white;
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  box-shadow: -1px 4px 1px 1px #99c9ff;
 }

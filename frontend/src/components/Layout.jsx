@@ -148,21 +148,7 @@ function Layout() {
 
       {/* Main Content Area */}
       <div className="flex flex-col flex-1 w-full relative">
-        <Header dark={dark} toggleTheme={toggleTheme} />
-
-        {/* Hamburger for mobile - Positioned absolutely/fixed relative to viewport if needed,
-            but here we can just rely on the Header having a spot or similar.
-            Actually, let's keep a floating button for mobile if Header doesn't cover it well,
-            OR integrate it into Header. For now, bringing back the floating button but styled better. */}
-        <button
-          className="lg:hidden fixed top-3 left-3 z-30 p-2 rounded-md bg-purple-600 text-white shadow-lg focus:outline-none"
-          onClick={() => setIsSideMenuOpen(!isSideMenuOpen)}
-          aria-label="Menu"
-        >
-           <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-          </svg>
-        </button>
+        <Header dark={dark} toggleTheme={toggleTheme} toggleSideMenu={() => setIsSideMenuOpen(!isSideMenuOpen)} />
 
         <main className="h-full overflow-y-auto bg-gray-50 dark:bg-gray-900">
           <div className="container px-6 mx-auto py-6">
