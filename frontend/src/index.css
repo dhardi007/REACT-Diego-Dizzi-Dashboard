@@ -479,22 +479,22 @@ code {
    HEADER OVERRIDES - Estilo Windmill Minimalista
    ======================================== */
 .header-icon-btn {
-  padding: 0.5rem;
-  border-radius: 0.375rem;
+  padding: 0.375rem;
+  border-radius: 0.5rem;
   border: none !important;
   background: transparent !important;
   outline: none !important;
   box-shadow: none !important;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.15s ease;
 }
 
 .header-icon-btn:hover {
-  background-color: rgba(107, 114, 128, 0.1) !important;
+  background-color: rgba(107, 114, 128, 0.08) !important;
 }
 
 .theme-dark .header-icon-btn:hover,
 .dark .header-icon-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 .header-icon-btn:focus {

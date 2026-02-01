@@ -15,9 +15,9 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
   return (
     <header className="z-10 py-4 bg-white dark:bg-gray-800 shadow-md">
       <div className="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
-        {/* Mobile hamburger - visible < 768px */}
+        {/* Mobile hamburger - synced with sidebar (lg:hidden) */}
         <button
-          className="header-icon-btn md:hidden mr-5 -ml-1"
+          className="header-icon-btn lg:hidden mr-5 -ml-1"
           onClick={toggleSideMenu}
           aria-label="Menu"
         >
@@ -31,7 +31,7 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
               <Search className="w-4 h-4 text-gray-400" />
             </div>
             <input
-              className="w-full py-2 pl-10 pr-4 text-sm text-gray-700 bg-transparent border-0 rounded-md dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none"
+              className="w-full py-2 pl-10 pr-4 text-sm text-gray-700 bg-gray-100 border-0 rounded-md dark:bg-gray-700 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
               type="text"
               placeholder="Search for projects"
               aria-label="Search"

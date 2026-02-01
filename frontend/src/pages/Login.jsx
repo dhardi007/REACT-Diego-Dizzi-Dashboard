@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Mail, Lock, AlertCircle, Github } from 'lucide-react';
+import './Login.css';
 
 const LOGO_PATH = '/logo-dashboard.png';
 
@@ -10,6 +11,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -32,13 +34,29 @@ function Login() {
     alert(`OAuth con ${provider} - Próximamente`);
   };
 
+  const handleMouseMove = (e) => {
+    const x = (e.clientX / window.innerWidth) * 100;
+    const y = (e.clientY / window.innerHeight) * 100;
+    setMousePosition({ x, y });
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 p-4 relative overflow-hidden">
+    <div
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 p-4 relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow" style={{animationDelay: '4s'}}></div>
+        <div
+          className="absolute w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 transition-all duration-500 ease-out pointer-events-none"
+          style={{
+            left: `${mousePosition.x}%`,
+            top: `${mousePosition.y}%`,
+            transform: 'translate(-50%, -50%)'
+          }}
+        ></div>
       </div>
 
       <div className="relative z-10 w-full max-w-5xl grid lg:grid-cols-2 gap-8 items-center">
@@ -159,7 +177,7 @@ function Login() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="btn-ripple w-full flex items-center justify-center gap-2 py-3 px-4 mt-6 bg-white/10 hover:bg-[#262331] border border-white/10 text-white hover:text-purple-200 font-bold rounded-lg shadow-md hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                className="login-btn-ripple login-btn-pulse w-full flex items-center justify-center gap-2 py-3 px-4 mt-6 bg-white/10 hover:bg-[#262331] border border-white/10 text-white hover:text-purple-200 font-bold rounded-lg shadow-md hover:shadow-xl hover:shadow-purple-500/20 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
               >
                 {isLoading ? (
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
