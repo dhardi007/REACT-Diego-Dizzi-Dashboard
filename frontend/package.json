@@ -2,6 +2,7 @@
   "name": "react-diego-dizzi-dashboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dhardi007.github.io/REACT-Diego-Dizzi-Dashboard",
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.17",
     "@testing-library/jest-dom": "^5.16.5",
