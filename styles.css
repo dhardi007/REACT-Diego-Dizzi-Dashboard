@@ -1,0 +1,208 @@
+/* <weight>: Use a value from 100 to 900
+<uniquifier>: Use a unique and descriptive class name */
+@import "tailwindcss";
+body {
+  background-color: rgb(28, 29, 29);
+  color: aliceblue;
+}
+
+img {
+  cursor: pointer;
+}
+
+#titulo,
+h2 {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500px;
+  font-size: 2em;
+  font-style: italic;
+  font-variation-settings: "wdth" 100;
+}
+
+/* Removed global p, div, and header styles that conflict with Tailwind */
+
+a {
+  color: rgb(172, 155, 132);
+  margin: 0 5px;
+}
+
+a:hover {
+  color: rgb(148, 169, 187);
+}
+
+#titulo:hover {
+  color: rgb(153, 122, 161);
+}
+
+@media screen and (max-width: 1500px) {
+  /* contenedor */
+
+  .contenedor {
+    max-width: 800px;
+    margin: 100px auto;
+    display: grid;
+    outline: solid 5px rgb(109, 47, 47);
+    background-color: wheat;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: dense;
+    color: black;
+    text-align: center;
+    line-height: 2rem;
+
+    padding: 2px;
+  }
+
+  /* partes */
+  .parte:hover {
+    color: rgb(210, 192, 227);
+  }
+
+  .parte-1 {
+    background-color: rgb(153, 207, 77);
+    font-weight: bold;
+    padding: 22px;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    padding: 50px;
+    margin: 40px;
+    cursor: pointer;
+  }
+
+  .parte-2 {
+    background-color: rgb(213, 85, 85);
+    font-weight: bold;
+    padding: 40px;
+  }
+
+  .parte-3 {
+    background-color: rgb(188, 188, 78);
+    font-weight: bold;
+    padding: 22px;
+    cursor: pointer;
+  }
+
+  .parte-4 {
+    background-color: rgb(58, 185, 143);
+    font-weight: bold;
+    padding: 22px;
+  }
+
+  .parte-5 {
+    background-color: rgb(88, 85, 188);
+    font-weight: bold;
+    padding: 40px;
+  }
+
+  .parte-6 {
+    background-color: rgb(184, 171, 171);
+    font-weight: bold;
+    padding: 22px;
+  }
+
+  .parte-7 {
+    background-color: rgb(30, 25, 25);
+    font-weight: bold;
+    padding: 22px;
+  }
+
+  .parte-8 {
+    background-color: rgb(107, 117, 148);
+    font-weight: bold;
+    padding: 40px;
+  }
+
+  .parte-9 {
+    background-color: rgb(225, 30, 160);
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .contenedor-2 {
+    max-width: 1100px;
+    margin: 100px auto;
+    padding: 40px;
+    display: flex;
+    background-color: rgb(199, 185, 161);
+    outline: solid 5px rgb(109, 47, 47);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    color: black;
+  }
+
+  .imagenes:hover {
+    background-color: rgb(210, 192, 227);
+  }
+
+  .img1 {
+    width: 255px;
+    height: auto;
+    padding: 10px;
+    margin: 10px 10px;
+    background-color: rgb(218, 110, 110);
+    cursor: pointer;
+  }
+
+  .img2 {
+    width: 350px;
+    height: 240px;
+    padding: 10px;
+    margin: 10px 10px;
+    background-color: rgb(42, 130, 132);
+    cursor: pointer;
+  }
+
+  .img3 {
+    width: 375px;
+    height: auto;
+    padding: 10px;
+    margin: 10px 10px;
+    background-color: rgb(202, 31, 228);
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .contenedor-2 {
+    max-width: 700px;
+    flex-direction: column;
+    padding: 2px;
+    margin: 3px auto;
+    align-content: center;
+  }
+
+  .img1 {
+    width: 355px;
+  }
+  .img2 {
+    width: 380px;
+  }
+  .img3 {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 545px) {
+  .contenedor-2 {
+    max-width: 545px;
+    flex-direction: row;
+    padding: 2px;
+    margin: 3px auto;
+  }
+
+  .img1 {
+    width: 255px;
+  }
+  .img2 {
+    width: 350px;
+    height: 240px;
+  }
+  .img3 {
+    width: 375px;
+  }
+}

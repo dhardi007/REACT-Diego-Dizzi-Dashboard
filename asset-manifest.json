@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/REACT-Diego-Dizzi-Dashboard/static/css/main.8907f4bf.css",
+    "main.js": "/REACT-Diego-Dizzi-Dashboard/static/js/main.ef8add5c.js",
+    "static/media/testimonio-emma.png": "/REACT-Diego-Dizzi-Dashboard/static/media/testimonio-emma.add10415a5668325d2f2.png",
+    "static/media/testimonio-sarah.png": "/REACT-Diego-Dizzi-Dashboard/static/media/testimonio-sarah.2c504d1ebaf1961e4a40.png",
+    "static/media/testimonio-shawn.png": "/REACT-Diego-Dizzi-Dashboard/static/media/testimonio-shawn.0d373888087fb18fc145.png",
+    "static/media/freecodecamp-logo.png": "/REACT-Diego-Dizzi-Dashboard/static/media/freecodecamp-logo.5486935b905c7949600c.png",
+    "index.html": "/REACT-Diego-Dizzi-Dashboard/index.html",
+    "main.8907f4bf.css.map": "/REACT-Diego-Dizzi-Dashboard/static/css/main.8907f4bf.css.map",
+    "main.ef8add5c.js.map": "/REACT-Diego-Dizzi-Dashboard/static/js/main.ef8add5c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8907f4bf.css",
+    "static/js/main.ef8add5c.js"
+  ]
+}
