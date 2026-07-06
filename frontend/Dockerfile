@@ -1,20 +1,21 @@
-# Usar imagen base de Node.js
-FROM node:18-alpine
+# Build stage
+FROM node:18-alpine AS builder
 
-# Establecer directorio de trabajo
 WORKDIR /app
 
-# Copiar archivos de dependencias
 COPY package*.json ./
+RUN npm ci
 
-# Instalar dependencias
-RUN npm install
-
-# Copiar el resto del código
 COPY . .
+RUN npm run build
 
-# Exponer el puerto (React usa 3000 por defecto)
-EXPOSE 3000
+# Production stage - serve with nginx
+FROM nginx:alpine
 
-# Comando para iniciar la aplicación
-CMD ["npm", "start"]
+COPY --from=builder /app/build /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
