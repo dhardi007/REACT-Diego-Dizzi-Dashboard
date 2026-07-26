@@ -1,145 +1,333 @@
-import { Link } from 'react-router-dom';
+// Dashboard.jsx - Simple Project Dashboard
 import { useState, useEffect } from 'react';
-import { Users, Wallet, ShoppingCart, MessageCircle, TrendingUp, Star, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Plus, FolderOpen, Edit, Trash2, Star, Clock, CheckCircle, Search, MoreHorizontal, ArrowRight, ExternalLink, Heart, Code, Zap, Globe, Layers, GitBranch, Database, Server, Cloud, Mail, Users, Settings, Shield, BarChart2, TrendingUp, TrendingDown, Minus, Plus as PlusIcon, Filter, Menu, X, Eye, MessageSquare, Download, Upload, Share2 } from 'lucide-react';
 
-const DEMO_STATS = {
-  totalClients: "6,389",
-  accountBalance: "$ 46,760.89",
-  newSales: "376",
-  pendingContacts: 35,
-};
-
-const TABLE_DATA = [
-  { name: 'Hans Burger', role: '10x Developer', amount: '$ 863.45', status: 'Approved', statusType: 'success', date: '6/10/2020', img: 'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ' },
-  { name: 'Jolina Angelie', role: 'Unemployed', amount: '$ 369.95', status: 'Pending', statusType: 'warning', date: '6/10/2020', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6' },
-  { name: 'Sarah Curry', role: 'Designer', amount: '$ 86.00', status: 'Denied', statusType: 'danger', date: '6/10/2020', img: 'https://images.unsplash.com/photo-1551069613-1904dbdcda11?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ' },
+const initialProjects = [
+  {
+    id: 1,
+    name: 'Portfolio Website',
+    description: 'Personal portfolio built with React and Tailwind',
+    tags: ['React', 'Tailwind', 'Vite'],
+    status: 'active',
+    progress: 75,
+    updated: '2 hours ago',
+    starred: true,
+    link: 'https://github.com',
+  },
+  {
+    id: 2,
+    name: 'Task Manager App',
+    description: 'Full-stack task management with real-time updates',
+    tags: ['React', 'Node.js', 'Socket.io'],
+    status: 'active',
+    progress: 45,
+    updated: '1 day ago',
+    starred: false,
+    link: 'https://github.com',
+  },
+  {
+    id: 3,
+    name: 'Weather Dashboard',
+    description: 'Beautiful weather app with location-based forecasts',
+    tags: ['React', 'API', 'Charts'],
+    status: 'completed',
+    progress: 100,
+    updated: '3 days ago',
+    starred: true,
+    link: 'https://github.com',
+  },
+  {
+    id: 4,
+    name: 'E-commerce UI Kit',
+    description: 'Reusable components for modern e-commerce',
+    tags: ['React', 'Storybook', 'TypeScript'],
+    status: 'draft',
+    progress: 20,
+    updated: '1 week ago',
+    starred: false,
+    link: 'https://github.com',
+  },
+  {
+    id: 5,
+    name: 'Blog Platform',
+    description: 'Markdown-based blog with CMS integration',
+    tags: ['Next.js', 'MDX', 'Contentful'],
+    status: 'active',
+    progress: 60,
+    updated: '5 hours ago',
+    starred: false,
+    link: 'https://github.com',
+  },
+  {
+    id: 6,
+    name: 'Design System',
+    description: 'Consistent UI components for team adoption',
+    tags: ['React', 'Storybook', 'Tailwind'],
+    status: 'review',
+    progress: 85,
+    updated: '2 days ago',
+    starred: true,
+    link: 'https://github.com',
+  },
 ];
 
-const statusStyles = {
-  success: 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200/50 dark:border-emerald-500/20',
-  warning: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 border border-amber-200/50 dark:border-amber-500/20',
-  danger: 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10 border border-red-200/50 dark:border-red-500/20',
+const statusConfig = {
+  active: { label: 'En progreso', color: 'bg-blue-500', text: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-50 dark:bg-blue-500/10' },
+  completed: { label: 'Completado', color: 'bg-emerald-500', text: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-50 dark:bg-emerald-500/10' },
+  draft: { label: 'Borrador', color: 'bg-gray-400', text: 'text-gray-600 dark:text-gray-400', bg: 'bg-gray-50 dark:bg-gray-500/10' },
+  review: { label: 'En revisión', color: 'bg-purple-500', text: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-50 dark:bg-purple-500/10' },
+  paused: { label: 'Pausado', color: 'bg-amber-500', text: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-50 dark:bg-amber-500/10' },
 };
-
-const cards = [
-  { label: 'Total Clients', value: DEMO_STATS.totalClients, icon: Users, gradient: 'from-purple-600 to-blue-600', change: '+12.5%', positive: true },
-  { label: 'Account Balance', value: DEMO_STATS.accountBalance, icon: Wallet, gradient: 'from-emerald-500 to-teal-600', change: '+8.2%', positive: true },
-  { label: 'New Sales', value: DEMO_STATS.newSales, icon: ShoppingCart, gradient: 'from-orange-500 to-pink-600', change: '-3.1%', positive: false },
-  { label: 'Pending Contacts', value: DEMO_STATS.pendingContacts, icon: MessageCircle, gradient: 'from-cyan-500 to-blue-600', change: '+2', positive: true },
-];
 
 function Dashboard() {
-  const [stats, setStats] = useState({
-    totalClients: "...",
-    accountBalance: "Loading...",
-    newSales: "...",
-    pendingContacts: 35,
+  const [projects, setProjects] = useState(() => {
+    const saved = localStorage.getItem('projects');
+    return saved ? JSON.parse(saved) : initialProjects;
   });
-  const [dbStatus, setDbStatus] = useState("Demo Mode");
+  const [search, setSearch] = useState('');
+  const [filterStatus, setFilterStatus] = useState('all');
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [editingProject, setEditingProject] = useState(null);
+  const [newProject, setNewProject] = useState({
+    name: '',
+    description: '',
+    tags: '',
+    status: 'draft',
+  });
 
   useEffect(() => {
-    setStats(DEMO_STATS);
-  }, []);
+    localStorage.setItem('projects', JSON.stringify(projects));
+  }, [projects]);
+
+  const filteredProjects = projects.filter(p => {
+    const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase()) ||
+                          p.description.toLowerCase().includes(search.toLowerCase()) ||
+                          p.tags.toLowerCase().includes(search.toLowerCase());
+    const matchesStatus = filterStatus === 'all' || p.status === filterStatus;
+    return matchesSearch && matchesStatus;
+  });
+
+  const handleCreate = (e) => {
+    e.preventDefault();
+    if (!newProject.name.trim()) return;
+    
+    const project = {
+      id: Date.now(),
+      name: newProject.name.trim(),
+      description: newProject.description.trim(),
+      tags: newProject.tags.trim(),
+      status: newProject.status,
+      progress: newProject.status === 'completed' ? 100 : newProject.status === 'draft' ? 0 : 10,
+      updated: 'Just now',
+      starred: false,
+      link: '#',
+    };
+    
+    setProjects([project, ...projects]);
+    resetForm();
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    if (!newProject.name.trim()) return;
+    
+    setProjects(projects.map(p => 
+      p.id === editingProject.id 
+        ? { ...p, ...newProject, updated: 'Just now' }
+        : p
+    ));
+    resetForm();
+  };
+
+  const handleEdit = (project) => {
+    setEditingProject(project);
+    setNewProject({
+      name: project.name,
+      description: project.description,
+      tags: project.tags,
+      status: project.status,
+    });
+    setShowCreateModal(true);
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm('¿Eliminar este proyecto?')) {
+      setProjects(projects.filter(p => p.id !== id));
+    }
+  };
+
+  const handleStar = (id) => {
+    setProjects(projects.map(p => 
+      p.id === id ? { ...p, starred: !p.starred } : p
+    ));
+  };
+
+  const resetForm = () => {
+    setNewProject({ name: '', description: '', tags: '', status: 'draft' });
+    setEditingProject(null);
+    setShowCreateModal(false);
+  };
+
+  const statusConfigMap = {
+    active: { label: 'En progreso', color: 'bg-blue-500', text: 'text-blue-600 dark:text-blue-400', bg: 'bg-blue-50 dark:bg-blue-500/10' },
+    completed: { label: 'Completado', color: 'bg-emerald-500', text: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-50 dark:bg-emerald-500/10' },
+    draft: { label: 'Borrador', color: 'bg-gray-400', text: 'text-gray-600 dark:text-gray-400', bg: 'bg-gray-50 dark:bg-gray-500/10' },
+    review: { label: 'En revisión', color: 'bg-purple-500', text: 'text-purple-600 dark:text-purple-400', bg: 'bg-purple-50 dark:bg-purple-500/10' },
+    paused: { label: 'Pausado', color: 'bg-amber-500', text: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-50 dark:bg-amber-500/10' },
+  };
+
+  const getStatusConfig = (status) => statusConfigMap[status] || statusConfigMap.draft;
 
   return (
-    <div className="space-y-8">
+    <div className="animate-fade-in">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Resumen general de tu plataforma</p>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Mis Proyectos</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Gestiona y organiza tus proyectos</p>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-white/[0.04] rounded-full">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            {dbStatus}
-          </span>
-          <Link
-            to="/testimonios"
-            className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl hover:from-purple-500 hover:to-pink-500 transition-all shadow-lg shadow-purple-600/20 hover:shadow-xl hover:shadow-purple-600/30"
-          >
-            <Star className="w-4 h-4" />
-            Testimonios
-          </Link>
-        </div>
+        <button
+          onClick={() => setShowCreateModal(true)}
+          className="btn-primary"
+        >
+          <Plus className="w-4 h-4" />
+          Nuevo Proyecto
+        </button>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        {cards.map((card, i) => {
-          const Icon = card.icon;
-          return (
-            <div key={i} className="group relative bg-white dark:bg-white/[0.04] rounded-2xl border border-gray-200/50 dark:border-white/[0.06] p-5 hover:shadow-lg hover:shadow-purple-600/5 transition-all duration-300 stagger-item">
-              <div className="flex items-start justify-between mb-4">
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${card.gradient} flex items-center justify-center shadow-lg`}>
-                  <Icon className="w-5 h-5 text-white" />
-                </div>
-                <span className={`flex items-center gap-0.5 text-xs font-medium px-2 py-0.5 rounded-full ${
-                  card.positive
-                    ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10'
-                    : 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10'
-                }`}>
-                  {card.positive ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
-                  {card.change}
-                </span>
-              </div>
-              <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{card.label}</p>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{card.value}</p>
-            </div>
-          );
-        })}
+      {/* Search & Filters */}
+      <div className="flex flex-col sm:flex-row gap-4 mb-6">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <input
+            type="text"
+            placeholder="Buscar proyectos..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="input pl-10"
+            placeholder="Buscar por nombre, descripción o etiquetas..."
+          />
+        </div>
+        <select
+          value={filterStatus}
+          onChange={(e) => setFilterStatus(e.target.value)}
+          className="input w-auto sm:w-48"
+        >
+          <option value="all">Todos los estados</option>
+          <option value="active">En progreso</option>
+          <option value="completed">Completado</option>
+          <option value="draft">Borrador</option>
+          <option value="review">En revisión</option>
+          <option value="paused">Pausado</option>
+        </select>
       </div>
 
-      {/* Table */}
-      <div className="bg-white dark:bg-white/[0.04] rounded-2xl border border-gray-200/50 dark:border-white/[0.06] overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-200/50 dark:border-white/[0.06]">
-          <div className="flex items-center justify-between">
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Transacciones Recientes</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">Últimas 3 transacciones registradas</p>
-            </div>
-            <button className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-500 transition-colors">
-              Ver todas &rarr;
-            </button>
-          </div>
+      {/* Projects Grid */}
+      {projects.length === 0 ? (
+        <div className="text-center py-16">
+          <FolderOpen className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No hay proyectos aún</h3>
+          <p className="text-gray-500 dark:text-gray-400 mb-6">Crea tu primer proyecto para empezar</p>
+          <button onClick={() => setShowCreateModal(true)} className="btn-primary">
+            <Plus className="w-4 h-4 mr-2" />
+            Crear mi primer proyecto
+          </button>
         </div>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 dark:text-gray-400 uppercase">
-                <th className="px-6 py-4">Client</th>
-                <th className="px-6 py-4">Amount</th>
-                <th className="px-6 py-4">Status</th>
-                <th className="px-6 py-4">Date</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100 dark:divide-white/[0.06]">
-              {TABLE_DATA.map((row, i) => (
-                <tr key={i} className="group hover:bg-gray-50 dark:hover:bg-white/[0.02] transition-colors">
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="relative w-9 h-9 rounded-full overflow-hidden ring-2 ring-gray-100 dark:ring-white/[0.06]">
-                        <img className="object-cover w-full h-full" src={row.img} alt="" loading="lazy" />
+      ) : filteredProjects.length === 0 ? (
+        <div className="text-center py-12">
+          <Search className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No se encontraron proyectos</h3>
+          <p className="text-gray-500 dark:text-gray-400">Intenta cambiar los filtros o la búsqueda</p>
+        </div>
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {projects
+            .filter(p => filteredProjects.includes(p))
+            .sort((a, b) => (b.starred === a.starred ? 0 : b.starred ? 1 : -1) || b.id - a.id)
+            .map((project) => {
+              const status = getStatusConfig(project.status);
+              return (
+                <article
+                  key={project.id}
+                  className="card group animate-slide-up bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary-500/50"
+                >
+                  <div className="p-5">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-semibold text-gray-900 dark:text-white truncate">{project.name}</h3>
+                          {project.starred && (
+                            <button
+                              onClick={(e) => { e.stopPropagation(); handleStar(project.id); }}
+                              className="text-yellow-500 hover:scale-110 transition-transform"
+                              aria-label="Desmarcar favorito"
+                            >
+                              <Star className="w-5 h-5 fill-current" />
+                            </button>
+                          )}
+                        </div>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{project.description}</p>
                       </div>
-                      <div>
-                        <p className="text-sm font-semibold text-gray-900 dark:text-white">{row.name}</p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">{row.role}</p>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleEdit(project); }}
+                        className="p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors opacity-0 group-hover:opacity-100"
+                        aria-label="Editar proyecto"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {project.tags.split(',').slice(0, 4).map((tag, i) => (
+                        <span key={i} className="badge badge-primary text-xs">{tag.trim()}</span>
+                      ))}
+                      {project.tags.split(',').length > 4 && (
+                        <span className="badge badge-primary text-xs">+{project.tags.split(',').length - 4} más</span>
+                      )}
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <span className={`badge ${status.bg} ${status.text}`}>{getStatusConfig(project.status).label}</span>
+                      <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <Clock className="w-3.5 h-3.5" />
+                        <span>{project.updated}</span>
                       </div>
                     </div>
-                  </td>
-                  <td className="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">{row.amount}</td>
-                  <td className="px-6 py-4">
-                    <span className={`inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full ${statusStyles[row.statusType]}`}>
-                      {row.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">{row.date}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </div>
+                  
+                  <div className="px-5 pb-5 pt-0 border-t border-gray-100 dark:border-gray-700">
+                    <div className="mb-3">
+                      <div className="flex items-center justify-between text-xs mb-1">
+                        <span className="text-gray-500 dark:text-gray-400">Progreso</span>
+                        <span className="font-medium text-gray-900 dark:text-white">{project.progress}%</span>
+                      </div>
+                      <div className="h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-gradient-to-r from-orange-500 to-red-500 rounded-full transition-all duration-500"
+                          style={{ width: `${project.progress}%` }}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button className="btn-ghost btn-sm text-xs flex-1" onClick={(e) => { e.stopPropagation(); window.open(project.link, '_blank'); }}>
+                        <ExternalLink className="w-3.5 h-3.5 mr-1" />
+                        Ver código
+                      </button>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleDelete(project.id); }}
+                        className="btn-ghost btn-sm text-xs text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/20"
+                        aria-label="Eliminar proyecto"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
         </div>
-      </div>
+      )}
     </div>
   );
 }
