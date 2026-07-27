@@ -5,22 +5,21 @@ import Header from './Header';
 
 function Layout() {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    return saved !== null ? saved === 'dark' : true;
+  });
   const location = useLocation();
 
   const toggleTheme = () => {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.classList.toggle('dark', next);
+    setDark(prev => !prev);
   };
 
   useEffect(() => {
-    if (dark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
+    const next = dark ? 'dark' : 'light';
+    document.documentElement.classList.toggle('dark', dark);
+    localStorage.setItem('theme', next);
+  }, [dark]);
 
   const isActive = (path) => location.pathname === path;
 
