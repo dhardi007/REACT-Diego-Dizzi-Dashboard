@@ -9,15 +9,17 @@ function Layout() {
   const location = useLocation();
 
   const toggleTheme = () => {
-    setDark((prev) => {
-      const next = !prev;
-      document.documentElement.classList.toggle('dark', next);
-      return next;
-    });
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle('dark', next);
   };
 
   useEffect(() => {
-    document.documentElement.classList.add('dark');
+    if (dark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, []);
 
   const isActive = (path) => location.pathname === path;
