@@ -45,9 +45,9 @@ export function LoginPage() {
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
           {/* Card */}
-          <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl shadow-black/50 animate-scale-in">
+          <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl px-8 py-12 shadow-2xl shadow-black/50 animate-scale-in">
             {/* Header */}
-            <div className="text-center mb-8">
+            <div className="text-center mb-10">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/30 mb-6">
                 <Zap className="w-8 h-8 text-white" />
               </div>
@@ -56,13 +56,13 @@ export function LoginPage() {
             </div>
 
             {/* Demo credentials */}
-            <div className="mb-6 p-3 rounded-lg bg-white/5 border border-white/10 text-center animate-fade-in">
+            <div className="mb-8 p-3 rounded-lg bg-white/5 border border-white/10 text-center animate-fade-in">
               <p className="text-xs text-white/60 font-medium">Credenciales demo:</p>
               <p className="text-sm font-mono text-white/90 font-medium mt-1">admin@dashboard.com / admin123</p>
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {error && (
                 <div className="flex items-center gap-2 p-3 rounded-lg bg-red-500/20 border border-red-500/30 text-red-300 text-sm animate-slide-up">
                   <AlertCircle className="w-4 h-4 flex-shrink-0" />
@@ -113,7 +113,7 @@ export function LoginPage() {
                 </div>
               </div>
 
-              <div className="text-center mt-8">
+              <div className="text-center mt-10">
                 <button
                   type="submit"
                   disabled={isLoading}
@@ -143,7 +143,7 @@ export function LoginPage() {
             </form>
 
             {/* Demo info */}
-            <div className="mt-6 pt-6 border-t border-white/10">
+            <div className="mt-8 pt-6 border-t border-white/10">
               <p className="text-center text-white/50 text-xs mb-4">O continua con</p>
               <div className="grid grid-cols-2 gap-3">
                 <button className="btn-ghost btn-sm py-3 bg-white/5 hover:bg-white/10 text-white/80 hover:text-white transition-colors">
@@ -156,7 +156,7 @@ export function LoginPage() {
             </div>
 
             {/* Features */}
-            <div className="mt-8 space-y-3">
+            <div className="mt-10 space-y-3">
               {[
                 { icon: Shield, title: 'Seguro', desc: 'JWT + Refresh tokens' },
                 { icon: Zap, title: 'Rápido', desc: 'Login < 500ms' },
@@ -173,7 +173,7 @@ export function LoginPage() {
               ))}
             </div>
 
-            <p className="mt-8 text-center text-white/40 text-xs">
+            <p className="mt-10 text-center text-white/40 text-xs">
               © 2025 Dizzi Dashboard. Todos los derechos reservados.
             </p>
           </div>
