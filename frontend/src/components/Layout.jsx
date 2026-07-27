@@ -116,7 +116,7 @@ function Layout() {
         <Header dark={dark} toggleTheme={toggleTheme} toggleSideMenu={() => setIsSideMenuOpen(!isSideMenuOpen)} />
 
         <main className="h-full overflow-y-auto bg-gray-50 dark:bg-[#0a0615]">
-          <div className="container px-6 mx-auto py-6">
+          <div className="px-6 mx-auto py-6 max-w-screen-2xl">
             <Outlet />
           </div>
         </main>

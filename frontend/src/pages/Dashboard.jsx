@@ -277,7 +277,7 @@ function Dashboard() {
           <p className="text-gray-500 dark:text-gray-400">Intenta cambiar los filtros o la búsqueda</p>
         </div>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {projects
             .filter(p => filteredProjects.includes(p))
             .sort((a, b) => (b.starred === a.starred ? 0 : b.starred ? 1 : -1) || b.id - a.id)

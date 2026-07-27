@@ -43,15 +43,15 @@ export function LoginPage() {
       </div>
 
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md">
+          <div className="w-full max-w-md 2xl:max-w-lg">
           {/* Card */}
-          <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl px-8 py-12 shadow-2xl shadow-black/50 animate-scale-in">
+          <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-2xl 2xl:rounded-3xl px-8 py-12 2xl:px-12 2xl:py-16 shadow-2xl shadow-black/50 animate-scale-in">
             {/* Header */}
             <div className="text-center mb-10">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/30 mb-6">
-                <Zap className="w-8 h-8 text-white" />
+              <div className="inline-flex items-center justify-center w-16 h-16 2xl:w-20 2xl:h-20 rounded-2xl bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/30 mb-6 2xl:mb-8">
+                <Zap className="w-8 h-8 2xl:w-10 2xl:h-10 text-white" />
               </div>
-              <h1 className="text-2xl font-bold text-white drop-shadow-lg mb-2">Dizzi Dashboard</h1>
+              <h1 className="text-2xl 2xl:text-3xl font-bold text-white drop-shadow-lg mb-2">Dizzi Dashboard</h1>
               <p className="text-white/80 drop-shadow-md">Inicia sesión para continuar</p>
             </div>
 
