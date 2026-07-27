@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* Design System - Minimal & Elegant */
 :root {
@@ -55,32 +56,30 @@
 }
 
 /* Dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #121218;
-    --bg-elevated: #1a1a22;
-    --fg: #f0efe8;
-    --fg-muted: #8a8a9a;
-    --fg-subtle: #5a5a6a;
-    --border: #2a2a35;
-    --border-strong: #3a3a4a;
-    --surface: #1a1a22;
-    --surface-hover: #22222c;
-    --brand: #d4a574;
-    --brand-hover: #e0b88a;
-    --brand-light: #2d2018;
-    --brand-glow: rgba(212, 165, 116, 0.25);
-    --accent: #8ab88a;
-    --accent-hover: #a0d0a0;
-    --accent-light: #1a2a1a;
-    --success: #8ab88a;
-    --warning: #e8c56a;
-    --error: #e08a7a;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5);
-    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6);
-  }
+.dark {
+  --bg: #121218;
+  --bg-elevated: #1a1a22;
+  --fg: #f0efe8;
+  --fg-muted: #8a8a9a;
+  --fg-subtle: #5a5a6a;
+  --border: #2a2a35;
+  --border-strong: #3a3a4a;
+  --surface: #1a1a22;
+  --surface-hover: #22222c;
+  --brand: #d4a574;
+  --brand-hover: #e0b88a;
+  --brand-light: #2d2018;
+  --brand-glow: rgba(212, 165, 116, 0.25);
+  --accent: #8ab88a;
+  --accent-hover: #a0d0a0;
+  --accent-light: #1a2a1a;
+  --success: #8ab88a;
+  --warning: #e8c56a;
+  --error: #e08a7a;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6);
 }
 
 /* Base */
