@@ -36,13 +36,24 @@ Esta aplicación fue creada por [Estefania Cassingena Navone](https://twitter.co
 
 ## Ejecutar la Aplicación
 
-Para iniciar la aplicación, debes ejecutar el comando `npm start` en el terminal. Si trabajas con Visual Studio Code, puedes abrir el terminal con el atajo de teclado `ctrl + ñ` si tu teclado está en español y con ``ctrl + ` `` si tu teclado está en inglés.
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-La aplicación se abrirá automáticamente en el navegador configurado por defecto en tu dispositivo y se ejecutará en `localhost:3000`.
+La aplicación se abrirá automáticamente en `http://localhost:5173`.
 
-## Instalar Módulos
+> El proyecto fue migrado de CRA a Vite. El `package.json` está en `frontend/`, no en la raíz.
 
-Para instalar los módulos necesarios para la aplicación, debes ejecutar el comando `npm install` en el terminal.
+## Build para Producción
+
+```bash
+cd frontend
+npm run build
+```
+
+El build se genera en `frontend/build/`.
 
 ## Aprende React
 
