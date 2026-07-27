@@ -8,7 +8,7 @@ import { Eye, EyeOff, Mail, Lock, AlertCircle, CheckCircle2, Zap, Shield, Users,
 export function LoginPage() {
   const { login, isLoading } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('admin@pce.com');
+  const [email, setEmail] = useState('admin@dashboard.com');
   const [password, setPassword] = useState('admin123');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
@@ -20,7 +20,7 @@ export function LoginPage() {
     setSubmitted(true);
     try {
       await login(email, password);
-      navigate('/app');
+      navigate('/');
     } catch (err) {
       setError(err.message || 'Error al iniciar sesión');
     }
@@ -51,14 +51,14 @@ export function LoginPage() {
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent shadow-lg shadow-primary/30 mb-6">
                 <Zap className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-2xl font-bold text-white drop-shadow-lg mb-2">PCE Agencia</h1>
+              <h1 className="text-2xl font-bold text-white drop-shadow-lg mb-2">Dizzi Dashboard</h1>
               <p className="text-white/80 drop-shadow-md">Inicia sesión para continuar</p>
             </div>
 
             {/* Demo credentials */}
             <div className="mb-6 p-3 rounded-lg bg-white/5 border border-white/10 text-center animate-fade-in">
               <p className="text-xs text-white/60 font-medium">Credenciales demo:</p>
-              <p className="text-sm font-mono text-white/90 font-medium mt-1">admin@pce.com / admin123</p>
+              <p className="text-sm font-mono text-white/90 font-medium mt-1">admin@dashboard.com / admin123</p>
             </div>
 
             {/* Form */}
@@ -79,7 +79,7 @@ export function LoginPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="admin@pce.com"
+                    placeholder="admin@dashboard.com"
                     disabled={isLoading}
                     className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30"
                   />
@@ -170,7 +170,7 @@ export function LoginPage() {
             </div>
 
             <p className="mt-8 text-center text-white/40 text-xs">
-              © 2025 PCE Agencia. Todos los derechos reservados.
+              © 2025 Dizzi Dashboard. Todos los derechos reservados.
             </p>
           </div>
         </div>

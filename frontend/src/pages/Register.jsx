@@ -102,7 +102,7 @@ export function RegisterPage() {
                 <Zap className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-2xl font-bold text-white drop-shadow-lg mb-2">Crear Cuenta</h1>
-              <p className="text-white/80 drop-shadow-md">Únete a PCE Agencia hoy</p>
+              <p className="text-white/80 drop-shadow-md">Únete a Dizzi Dashboard hoy</p>
             </div>
 
             {/* Form */}
