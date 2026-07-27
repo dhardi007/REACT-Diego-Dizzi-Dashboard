@@ -23,7 +23,7 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
 
   return (
     <header className="z-10 py-3 bg-white dark:bg-[#0d081d] border-b border-gray-200/50 dark:border-white/[0.06]">
-      <div className="container flex items-center justify-between h-full px-6 mx-auto">
+      <div className="max-w-7xl mx-auto flex items-center justify-between h-full px-6">
         {/* Mobile hamburger */}
         <button
           className="lg:hidden mr-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/[0.06] transition-colors text-gray-500 dark:text-gray-400"

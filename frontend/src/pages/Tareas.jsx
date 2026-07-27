@@ -19,6 +19,85 @@ const priorityConfig = {
   low: { label: 'Baja', color: 'bg-gray-400', text: 'text-gray-600 dark:text-gray-400', bg: 'bg-gray-50 dark:bg-gray-500/10' },
 };
 
+function TodoItem({ todo, onToggle, onEdit, onDelete }) {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const due = formatDueDate(todo.dueDate);
+  const priorityColor = todo.priority === 'high' ? 'border-l-red-500' : todo.priority === 'medium' ? 'border-l-amber-500' : 'border-l-gray-400';
+
+  return (
+    <div
+      className={`group card p-3 md:p-4 lg:p-5 border-l-4 ${priorityColor} transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 ${todo.completed ? 'opacity-75' : ''}`}
+      role="listitem"
+    >
+      <div className="flex items-start gap-3 md:gap-4">
+        <button
+          onClick={() => onToggle(todo.id)}
+          className={`mt-0.5 transition-colors duration-200 ${todo.completed ? 'text-emerald-500' : 'text-gray-300 dark:text-gray-600 hover:text-primary'}`}
+        >
+          {todo.completed ? <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6" /> : <Circle className="w-5 h-5 md:w-6 md:h-6" />}
+        </button>
+        <div className="flex-1 min-w-0">
+          <p className={`text-sm md:text-base lg:text-lg font-medium ${todo.completed ? 'line-through text-gray-400 dark:text-gray-500' : 'text-gray-900 dark:text-white'}`}>
+            {todo.text}
+          </p>
+          <div className="flex flex-wrap items-center gap-1.5 md:gap-2 mt-1.5 md:mt-2">
+            <span className={`inline-flex items-center gap-1 px-1.5 md:px-2 py-0.5 rounded-full text-[10px] md:text-xs lg:text-sm font-medium ${priorityConfig[todo.priority].bg} ${priorityConfig[todo.priority].text}`}>
+              <span className={`w-1 h-1 md:w-1.5 md:h-1.5 rounded-full ${priorityConfig[todo.priority].color}`} />
+              {priorityConfig[todo.priority].label}
+            </span>
+            {todo.tags?.map(tag => (
+              <span key={tag} className="inline-flex items-center gap-1 px-1.5 md:px-2 py-0.5 rounded-full text-[10px] md:text-xs lg:text-sm font-medium bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
+                <Tag className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                {tag}
+              </span>
+            ))}
+            {due && (
+              <span className={`inline-flex items-center gap-1 px-1.5 md:px-2 py-0.5 rounded-full text-[10px] md:text-xs lg:text-sm font-medium ${due.className}`}>
+                <Calendar className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                {due.text}
+              </span>
+            )}
+            <span className="inline-flex items-center gap-1 px-1.5 md:px-2 py-0.5 rounded-full text-[10px] md:text-xs lg:text-sm font-medium text-gray-400">
+              <Clock className="w-2.5 h-2.5 md:w-3 md:h-3" />
+              {new Date(todo.createdAt).toLocaleDateString('es-ES')}
+            </span>
+          </div>
+        </div>
+        <div className="relative flex items-center gap-0.5 md:gap-1">
+          <button
+            onClick={() => onEdit(todo)}
+            className="p-1.5 md:p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-primary/10 transition-all opacity-0 group-hover:opacity-100"
+            title="Editar"
+          >
+            <Edit className="w-3.5 h-3.5 md:w-4 md:h-4" />
+          </button>
+          <button
+            onClick={() => onDelete(todo.id)}
+            className="p-1.5 md:p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all opacity-0 group-hover:opacity-100"
+            title="Eliminar"
+          >
+            <Trash2 className="w-3.5 h-3.5 md:w-4 md:h-4" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function formatDueDate(dateStr) {
+  if (!dateStr) return null;
+  const date = new Date(dateStr);
+  const today = new Date();
+  const diff = date.getTime() - today.getTime();
+  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  if (days < 0) return { text: 'Vencido', className: 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-500/10' };
+  if (days === 0) return { text: 'Hoy', className: 'text-primary bg-primary/10' };
+  if (days === 1) return { text: 'Mañana', className: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10' };
+  if (days <= 7) return { text: `En ${days} días`, className: 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10' };
+  return { text: new Date(dateStr).toLocaleDateString('es-ES'), className: 'text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800' };
+}
+
 function Tareas() {
   const [todos, setTodos] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -112,80 +191,66 @@ function Tareas() {
     setShowForm(true);
   };
 
-  const formatDate = (dateStr) => {
-    if (!dateStr) return null;
-    const date = new Date(dateStr);
-    const today = new Date();
-    const diff = date.getTime() - today.getTime();
-    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-    
-    if (days < 0) return { text: 'Vencido', className: 'text-red-600 dark:text-red-400' };
-    if (days === 0) return { text: 'Hoy', className: 'text-primary' };
-    if (days === 1) return { text: 'Mañana', className: 'text-amber-600' };
-    if (days <= 7) return { text: `En ${days} días`, className: 'text-amber-600' };
-    return { text: new Date(dateStr).toLocaleDateString('es-ES'), className: 'text-gray-500 dark:text-gray-400' };
-  };
-
   return (
-    <div className="max-w-4xl mx-auto animate-fade-in">
+    <div className="max-w-6xl mx-auto animate-fade-in">
       {/* Header */}
-      <div className="mb-10 animate-slide-up">
-        <div className="flex items-center justify-between mb-8">
+      <div className="mb-6 md:mb-8 lg:mb-10 animate-slide-up">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 md:mb-8">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-medium mb-3 md:mb-4">
+              <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary animate-pulse" />
               Task Manager
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-1">Mis Tareas</h1>
-            <p className="text-gray-600 dark:text-gray-400">Organiza, prioriza y completa</p>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-1">Mis Tareas</h1>
+            <p className="text-sm md:text-base text-gray-600 dark:text-gray-400">Organiza, prioriza y completa</p>
           </div>
           <button
             onClick={() => { setFormData({ text: '', priority: 'medium', tags: '', dueDate: '' }); setShowForm(true); }}
-            className="btn-primary btn-lg shadow-lg shadow-primary/30"
+            className="btn-primary btn-lg shadow-lg shadow-primary/30 self-start"
           >
-            <Plus className="w-5 h-5" />
+            <Plus className="w-4 h-4 md:w-5 md:h-5" />
             Nueva tarea
           </button>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-4 gap-3 mb-6 animate-slide-up stagger-1">
-          <div className="card p-4 text-center hover:shadow-md transition-shadow">
-            <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.total}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Total</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-4 md:mb-6 animate-slide-up stagger-1">
+          <div className="card p-3 md:p-4 text-center hover:shadow-md transition-shadow">
+            <p className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">{stats.total}</p>
+            <p className="text-[10px] md:text-xs lg:text-sm text-gray-500 dark:text-gray-400">Total</p>
           </div>
-          <div className="card p-4 text-center hover:shadow-md transition-shadow">
-            <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{stats.active}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Pendientes</p>
+          <div className="card p-3 md:p-4 text-center hover:shadow-md transition-shadow">
+            <p className="text-xl md:text-2xl lg:text-3xl font-bold text-blue-600 dark:text-blue-400">{stats.active}</p>
+            <p className="text-[10px] md:text-xs lg:text-sm text-gray-500 dark:text-gray-400">Pendientes</p>
           </div>
-          <div className="card p-4 text-center hover:shadow-md transition-shadow">
-            <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{stats.completed}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Completadas</p>
+          <div className="card p-3 md:p-4 text-center hover:shadow-md transition-shadow">
+            <p className="text-xl md:text-2xl lg:text-3xl font-bold text-emerald-600 dark:text-emerald-400">{stats.completed}</p>
+            <p className="text-[10px] md:text-xs lg:text-sm text-gray-500 dark:text-gray-400">Completadas</p>
           </div>
-          <div className="card p-4 text-center hover:shadow-md transition-shadow">
-            <p className="text-2xl font-bold text-red-600 dark:text-red-400">{stats.overdue}</p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">Vencidas</p>
+          <div className="card p-3 md:p-4 text-center hover:shadow-md transition-shadow">
+            <p className="text-xl md:text-2xl lg:text-3xl font-bold text-red-600 dark:text-red-400">{stats.overdue}</p>
+            <p className="text-[10px] md:text-xs lg:text-sm text-gray-500 dark:text-gray-400">Vencidas</p>
           </div>
         </div>
 
         {/* Search & Filters */}
-        <div className="card p-4 mb-6 animate-slide-up stagger-1">
-          <div className="flex flex-col sm:flex-row gap-4">
+        <div className="card p-3 md:p-4 mb-4 md:mb-6 animate-slide-up stagger-1">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-gray-400" />
               <input
                 type="text"
                 placeholder="Buscar tareas..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="input pl-10"
+                className="input pl-9 md:pl-10 text-sm md:text-base"
               />
             </div>
             <div className="flex items-center gap-2">
               <select
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
-                className="input w-auto"
+                className="input w-auto text-sm md:text-base"
               >
                 <option value="all">Todas</option>
                 <option value="active">Pendientes</option>
@@ -194,7 +259,7 @@ function Tareas() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="input w-auto"
+                className="input w-auto text-sm md:text-base"
               >
                 <option value="created">Recientes</option>
                 <option value="priority">Prioridad</option>
@@ -208,32 +273,32 @@ function Tareas() {
       {/* Add/Edit Form */}
       {(showForm || editingId) && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in" onClick={() => resetForm()}>
-          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto animate-scale-in" onClick={e => e.stopPropagation()}>
-            <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 p-4 rounded-t-2xl flex items-center justify-between">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white">{editingId ? 'Editar tarea' : 'Nueva tarea'}</h3>
-              <button onClick={resetForm} className="btn-ghost p-2 hover:bg-gray-100 dark:hover:bg-gray-800">×</button>
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl w-full max-w-md md:max-w-lg lg:max-w-xl max-h-[90vh] overflow-y-auto animate-scale-in" onClick={e => e.stopPropagation()}>
+            <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 p-4 md:p-5 rounded-t-2xl flex items-center justify-between">
+              <h3 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">{editingId ? 'Editar tarea' : 'Nueva tarea'}</h3>
+              <button onClick={resetForm} className="btn-ghost p-2 hover:bg-gray-100 dark:hover:bg-gray-800 text-lg">×</button>
             </div>
-            <form onSubmit={editingId ? (e) => updateTodo(e, editingId) : addTodo} className="p-6 space-y-5">
+            <form onSubmit={editingId ? (e) => updateTodo(e, editingId) : addTodo} className="p-4 md:p-6 lg:p-8 space-y-4 md:space-y-5">
               <div>
-                <label className="label">Tarea</label>
+                <label className="label text-sm md:text-base">Tarea</label>
                 <textarea
                   value={formData.text}
                   onChange={(e) => setFormData({ ...formData, text: e.target.value })}
                   rows={3}
-                  className="input resize-none"
+                  className="input resize-none text-sm md:text-base"
                   placeholder="¿Qué necesitas hacer?"
                   required
                   autoFocus
                 />
               </div>
               
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
                 <div>
-                  <label className="label">Prioridad</label>
+                  <label className="label text-sm md:text-base">Prioridad</label>
                   <select
                     value={formData.priority}
                     onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
-                    className="input"
+                    className="input text-sm md:text-base"
                   >
                     <option value="high">🔴 Alta</option>
                     <option value="medium">🟡 Media</option>
@@ -241,24 +306,24 @@ function Tareas() {
                   </select>
                 </div>
                 <div>
-                  <label className="label">Fecha límite</label>
+                  <label className="label text-sm md:text-base">Fecha límite</label>
                   <input
                     type="date"
                     value={formData.dueDate}
                     onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-                    className="input"
+                    className="input text-sm md:text-base"
                     min={new Date().toISOString().split('T')[0]}
                   />
                 </div>
               </div>
 
               <div>
-                <label className="label">Etiquetas (separadas por comas)</label>
+                <label className="label text-sm md:text-base">Etiquetas (separadas por comas)</label>
                 <input
                   type="text"
                   value={formData.tags}
                   onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-                  className="input"
+                  className="input text-sm md:text-base"
                   placeholder="ej: diseño, frontend, urgente"
                 />
               </div>
@@ -267,13 +332,13 @@ function Tareas() {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="btn-secondary flex-1"
+                  className="btn-secondary flex-1 text-sm md:text-base"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="btn-primary flex-1"
+                  className="btn-primary flex-1 text-sm md:text-base"
                 >
                   {editingId ? 'Guardar cambios' : 'Crear tarea'}
                 </button>
@@ -285,142 +350,83 @@ function Tareas() {
 
       {/* Todo List */}
       <div className="animate-slide-up stagger-1">
-        {filteredTodos.length === 0 ? (
-          <div className="card p-12 text-center animate-fade-in">
-            <div className="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center mx-auto mb-4">
-              <CheckCircle className="w-8 h-8 text-gray-400" />
+        {todos.length === 0 ? (
+          <div className="card p-8 md:p-12 text-center animate-fade-in">
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center mx-auto mb-3 md:mb-4">
+              <CheckCircle className="w-6 h-6 md:w-8 md:h-8 text-gray-400" />
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              {search ? 'No se encontraron tareas' : todos.length === 0 ? 'No hay tareas aún' : filter === 'completed' ? 'No hay tareas completadas' : '¡Todo completado!'}
-            </h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-6">
-              {search ? 'Intenta con otra búsqueda' : filter === 'completed' ? 'Completa algunas tareas para verlas aquí' : '¡Crea tu primera tarea para empezar!'}
-            </p>
-            {!search && !editingId && (
-              <button onClick={() => setShowForm(true)} className="btn-primary">
-                <Plus className="w-4 h-4 mr-2" />
-                Crear primera tarea
-              </button>
-            )}
+            <h3 className="text-base md:text-lg lg:text-xl font-semibold text-gray-900 dark:text-white mb-1 md:mb-2">No hay tareas aún</h3>
+            <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 mb-4 md:mb-6">¡Crea tu primera tarea para empezar!</p>
+            <button onClick={() => setShowForm(true)} className="btn-primary text-sm md:text-base">
+              <Plus className="w-4 h-4 mr-2" />
+              Crear primera tarea
+            </button>
           </div>
         ) : (
-          <div className="space-y-3" role="list" aria-label="Lista de tareas">
-            {filteredTodos.map((todo, index) => (
-              <article
-                key={todo.id}
-                className={`card p-4 animate-slide-up stagger-1 relative group ${
-                  todo.completed ? 'opacity-70 bg-gray-50 dark:bg-gray-800/50' : ''
-                }`}
-                style={{ animationDelay: `${index * 50}ms` }}
-                role="listitem"
-              >
-                <div className="flex items-start gap-4">
-                  {/* Checkbox */}
-                  <button
-                    onClick={() => toggleComplete(todo.id)}
-                    className={`relative w-6 h-6 rounded-lg border-2 flex-shrink-0 mt-0.5 transition-all duration-200 ${
-                      todo.completed
-                        ? 'bg-primary border-primary'
-                        : 'border-gray-300 dark:border-gray-600 hover:border-primary/50'
-                    }`}
-                    aria-label={todo.completed ? 'Marcar como pendiente' : 'Marcar como completada'}
-                    aria-checked={todo.completed}
-                    role="checkbox"
-                  >
-                    {todo.completed && <CheckCircle2 className="w-4 h-4 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />}
-                  </button>
-
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-3 mb-2">
-                      <h3 className={`font-medium text-gray-900 dark:text-white ${todo.completed ? 'line-through text-gray-400 dark:text-gray-500' : ''}`}>
-                        {todo.text}
-                      </h3>
-                      <div className="flex items-center gap-1 flex-shrink-0">
-                        {todo.starred && <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />}
-                        {todo.dueDate && (
-                          <span className="text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
-                            📅 {new Date(todo.dueDate).toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit' })}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    
-                    {todo.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {todo.tags.slice(0, 4).map((tag, i) => (
-                          <span key={i} className="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium bg-primary/10 text-primary rounded-full">
-                            {tag}
-                          </span>
-                        ))}
-                        {todo.tags.length > 4 && <span className="text-xs text-gray-500 dark:text-gray-400">+{todo.tags.length - 4} más</span>}
-                      </div>
-                    )}
-
-                    <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
-                      <span className="flex items-center gap-1">
-                        <span className={`w-2 h-2 rounded-full ${priorityConfig[todo.priority].color}`} />
-                        <span className={priorityConfig[todo.priority].text}>{priorityConfig[todo.priority].label}</span>
-                      </span>
-                      {todo.dueDate && (
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {(() => {
-                            const diff = Math.ceil((new Date(todo.dueDate) - new Date()) / (1000 * 60 * 60 * 24));
-                            if (diff < 0) return <span className="text-red-600 dark:text-red-400">Vencido</span>;
-                            if (diff === 0) return <span className="text-primary">Hoy</span>;
-                            if (diff === 1) return <span className="text-amber-600">Mañana</span>;
-                            return <span>En {diff} días</span>;
-                          })()}
-                        </span>
-                      )}
-                    </div>
-                  </div>
+          <div className="space-y-6 md:space-y-8">
+            {/* Pendientes Section */}
+            <section>
+              <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-blue-500" />
+                <h2 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">Pendientes</h2>
+                <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400">({todos.filter(t => !t.completed).length})</span>
+              </div>
+              {todos.filter(t => !t.completed).length === 0 ? (
+                <div className="card p-6 md:p-8 text-center">
+                  <p className="text-sm md:text-base text-gray-500 dark:text-gray-400">¡Todo completado! 🎉</p>
                 </div>
-
-                {/* Actions */}
-                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button
-                    onClick={() => startEdit(todo)}
-                    className="btn-ghost btn-sm p-1.5 hover:bg-blue-50 dark:hover:bg-blue-900/20 text-blue-600 dark:text-blue-400"
-                    aria-label="Editar"
-                  >
-                    <Edit className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => deleteTodo(todo.id)}
-                    className="btn-ghost btn-sm p-1.5 hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 hover:text-red-700"
-                    aria-label="Eliminar"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+              ) : (
+                <div className="space-y-2 md:space-y-3" role="list" aria-label="Tareas pendientes">
+                  {todos.filter(t => !t.completed).sort((a, b) => b.createdAt - a.createdAt).map((todo, index) => (
+                    <TodoItem key={todo.id} todo={todo} index={index} onToggle={toggleComplete} onEdit={startEdit} onDelete={deleteTodo} />
+                  ))}
                 </div>
-              </article>
-            ))}
+              )}
+            </section>
+
+            {/* Completadas Section */}
+            <section>
+              <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                <div className="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-emerald-500" />
+                <h2 className="text-base md:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">Completadas</h2>
+                <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400">({todos.filter(t => t.completed).length})</span>
+              </div>
+              {todos.filter(t => t.completed).length === 0 ? (
+                <div className="card p-6 md:p-8 text-center">
+                  <p className="text-sm md:text-base text-gray-500 dark:text-gray-400">Completa tareas para verlas aquí</p>
+                </div>
+              ) : (
+                <div className="space-y-2 md:space-y-3" role="list" aria-label="Tareas completadas">
+                  {todos.filter(t => t.completed).sort((a, b) => b.createdAt - a.createdAt).map((todo, index) => (
+                    <TodoItem key={todo.id} todo={todo} index={index} onToggle={toggleComplete} onEdit={startEdit} onDelete={deleteTodo} />
+                  ))}
+                </div>
+              )}
+            </section>
           </div>
         )}
       </div>
 
       {/* Empty State for Filters */}
       {todos.length > 0 && filteredTodos.length === 0 && (
-        <div className="card p-8 text-center animate-fade-in">
-          <p className="text-gray-500 dark:text-gray-400">No hay tareas que coincidan con tu filtro</p>
+        <div className="card p-6 md:p-8 text-center animate-fade-in">
+          <p className="text-sm md:text-base text-gray-500 dark:text-gray-400">No hay tareas que coincidan con tu filtro</p>
         </div>
       )}
 
       {/* Footer Stats */}
-      <div className="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 animate-slide-up stagger-2">
+      <div className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs md:text-sm text-gray-500 dark:text-gray-400 animate-slide-up stagger-2">
         <span>{stats.active} de {stats.total} tareas pendientes</span>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 md:gap-4">
           <button
             onClick={() => setSortBy(sortBy === 'priority' ? 'created' : 'priority')}
-            className={`text-xs font-medium ${sortBy === 'priority' ? 'text-primary' : 'text-gray-400 hover:text-primary'}`}
+            className={`text-[10px] md:text-xs font-medium ${sortBy === 'priority' ? 'text-primary' : 'text-gray-400 hover:text-primary'}`}
           >
             Ordenar por prioridad
           </button>
           <button
             onClick={() => setSortBy(sortBy === 'due' ? 'created' : 'due')}
-            className={`text-xs font-medium ${sortBy === 'due' ? 'text-primary' : 'text-gray-400 hover:text-primary'}`}
+            className={`text-[10px] md:text-xs font-medium ${sortBy === 'due' ? 'text-primary' : 'text-gray-400 hover:text-primary'}`}
           >
             Ordenar por fecha
           </button>

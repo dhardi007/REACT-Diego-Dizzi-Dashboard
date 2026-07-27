@@ -9,9 +9,9 @@ const initialProjects = [
     name: 'Portfolio Website',
     description: 'Personal portfolio built with React and Tailwind',
     tags: 'React, Tailwind, Vite',
-    status: 'completed',
-    progress: 100,
-    updated: '2 hours ago',
+    status: 'active',
+    progress: 75,
+    updated: 'Just now',
     starred: true,
     link: 'https://github.com/dizzi1222/portfolio-terminal-dhardi',
     live: 'https://portfolio-terminal-dhardi.vercel.app',
@@ -21,8 +21,8 @@ const initialProjects = [
     name: 'Task Manager App',
     description: 'Full-stack task management with real-time updates',
     tags: 'React, Node.js, Socket.io',
-    status: 'completed',
-    progress: 100,
+    status: 'active',
+    progress: 45,
     updated: '1 day ago',
     starred: false,
     link: 'https://github.com/dizzi1222/REACT-Diego-Dizzi-Dashboard',
@@ -43,8 +43,8 @@ const initialProjects = [
     name: 'E-commerce UI Kit',
     description: 'Reusable components for modern e-commerce',
     tags: 'React, Storybook, TypeScript',
-    status: 'completed',
-    progress: 100,
+    status: 'draft',
+    progress: 20,
     updated: '1 week ago',
     starred: false,
     link: 'https://github.com/dizzi1222/REACT-Diego-Dizzi-Dashboard',
@@ -52,7 +52,7 @@ const initialProjects = [
   {
     id: 5,
     name: 'Blog Platform',
-    description: 'Markdown-based blog with CMS integration — artículos en dev.to',
+    description: 'Markdown-based blog with CMS integration',
     tags: 'Next.js, MDX, Contentful',
     status: 'active',
     progress: 60,
@@ -64,10 +64,10 @@ const initialProjects = [
   {
     id: 6,
     name: 'Design System',
-    description: 'Consistent UI components with docs, tokens y Storybook',
+    description: 'Consistent UI components for team adoption',
     tags: 'React, Storybook, Tailwind',
-    status: 'completed',
-    progress: 100,
+    status: 'review',
+    progress: 85,
     updated: '2 days ago',
     starred: true,
     link: 'https://github.com/dizzi1222/REACT-Diego-Dizzi-Dashboard',
@@ -76,9 +76,9 @@ const initialProjects = [
     id: 7,
     name: 'Marketplace de Talentos - CIC',
     description: 'Marketplace de talento para Cincinnatus Institute. MVP con autenticación, catálogo, watch list y panel admin.',
-    tags: 'React, Node.js, PostgreSQL, Docker, Figma, TypeScript, Material UI',
-    status: 'completed',
-    progress: 100,
+    tags: 'React, Node.js, PostgreSQL, Docker',
+    status: 'active',
+    progress: 70,
     updated: '3 days ago',
     starred: true,
     link: 'https://github.com/Cincinnatus-Institute-of-Craftsmanship/ptd-talento-front/tree/dev',
@@ -88,10 +88,10 @@ const initialProjects = [
     id: 8,
     name: 'PCE Agencia - Agencia de Viajes',
     description: 'App de finanzas y viajes — gestión de presupuestos, planificación de itinerarios y seguimiento de gastos.',
-    tags: 'JavaScript, HTML, CSS, TypeScript, Tailwind, Docker',
+    tags: 'JavaScript, HTML, CSS, TypeScript',
     status: 'active',
     progress: 50,
-    updated: '1 week ago',
+    updated: 'Just now',
     starred: false,
     link: 'https://github.com/dizzi1222/PCE-Agencia',
     live: 'https://pce-agencia.vercel.app',
@@ -278,7 +278,7 @@ function Dashboard() {
           <p className="text-gray-500 dark:text-gray-400">Intenta cambiar los filtros o la búsqueda</p>
         </div>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <div className="grid gap-4 md:gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {projects
             .filter(p => filteredProjects.includes(p))
             .sort((a, b) => (b.starred === a.starred ? 0 : b.starred ? 1 : -1) || b.id - a.id)
@@ -289,11 +289,11 @@ function Dashboard() {
                   key={project.id}
                   className="card group animate-slide-up bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary-500/50"
                 >
-                  <div className="p-6">
-                    <div className="flex items-start justify-between mb-4">
+                  <div className="p-4 md:p-5 lg:p-6">
+                    <div className="flex items-start justify-between mb-3 md:mb-4">
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-2">
-                          <h3 className="font-semibold text-gray-900 dark:text-white truncate">{project.name}</h3>
+                        <div className="flex items-center gap-2 mb-1.5 md:mb-2">
+                          <h3 className="font-semibold text-sm md:text-base text-gray-900 dark:text-white truncate">{project.name}</h3>
                           <button
                             onClick={(e) => { e.stopPropagation(); handleStar(project.id); }}
                             className={`${project.starred ? 'text-yellow-500' : 'text-gray-300 dark:text-gray-600'} hover:text-yellow-500 hover:scale-110 transition-all`}
@@ -302,7 +302,7 @@ function Dashboard() {
                             <Star className={`w-5 h-5 ${project.starred ? 'fill-current' : ''}`} />
                           </button>
                         </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{project.description}</p>
+                        <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{project.description}</p>
                       </div>
                       <button
                         onClick={(e) => { e.stopPropagation(); handleEdit(project); }}
@@ -313,27 +313,27 @@ function Dashboard() {
                       </button>
                     </div>
 
-                    <div className="flex flex-wrap gap-1.5 mb-4">
+                    <div className="flex flex-wrap gap-1 md:gap-1.5 mb-3 md:mb-4">
                       {project.tags.split(',').slice(0, 4).map((tag, i) => (
-                        <span key={i} className="badge badge-primary text-xs">{tag.trim()}</span>
+                        <span key={i} className="badge badge-primary text-[10px] md:text-xs">{tag.trim()}</span>
                       ))}
                       {project.tags.split(',').length > 4 && (
-                        <span className="badge badge-primary text-xs">+{project.tags.split(',').length - 4} más</span>
+                        <span className="badge badge-primary text-[10px] md:text-xs">+{project.tags.split(',').length - 4} más</span>
                       )}
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <span className={`badge ${status.bg} ${status.text}`}>{getStatusConfig(project.status).label}</span>
-                      <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-                        <Clock className="w-3.5 h-3.5" />
+                      <span className={`badge ${status.bg} ${status.text} text-[10px] md:text-xs`}>{getStatusConfig(project.status).label}</span>
+                      <div className="flex items-center gap-1.5 md:gap-2 text-[10px] md:text-xs text-gray-500 dark:text-gray-400">
+                        <Clock className="w-3 h-3 md:w-3.5 md:h-3.5" />
                         <span>{project.updated}</span>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="px-6 pb-6 pt-0 border-t border-gray-100 dark:border-gray-700">
-                    <div className="mb-4">
-                      <div className="flex items-center justify-between text-xs mb-1">
+                  <div className="px-4 md:px-5 lg:px-6 pb-4 md:pb-5 lg:pb-6 pt-0 border-t border-gray-100 dark:border-gray-700">
+                    <div className="mb-3 md:mb-4">
+                      <div className="flex items-center justify-between text-[10px] md:text-xs mb-1">
                         <span className="text-gray-500 dark:text-gray-400">Progreso</span>
                         <span className="font-medium text-gray-900 dark:text-white">{project.progress}%</span>
                       </div>

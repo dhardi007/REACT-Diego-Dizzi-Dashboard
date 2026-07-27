@@ -66,50 +66,50 @@ function Testimonios() {
   // }, [autoPlay, currentIndex]);
 
   return (
-    <div className="animate-fade-in max-w-7xl mx-auto px-4 2xl:px-8 py-10">
+    <div className="animate-fade-in max-w-7xl mx-auto px-4 lg:px-6 xl:px-8 py-8 md:py-10 lg:py-14 xl:py-16">
       {/* Header */}
-      <div className="mb-12 2xl:mb-20 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 text-sm 2xl:text-base font-medium mb-4 2xl:mb-6">
-          <Sparkles className="w-4 h-4 2xl:w-5 2xl:h-5" />
+      <div className="mb-8 md:mb-12 lg:mb-16 xl:mb-20 text-center">
+        <div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 text-xs md:text-sm lg:text-base font-medium mb-3 md:mb-4 lg:mb-5 xl:mb-6">
+          <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4 lg:w-5 lg:h-5" />
           Lo que dicen nuestros usuarios
         </div>
-        <h1 className="text-3xl sm:text-5xl 2xl:text-7xl font-bold text-gray-900 dark:text-white mb-4 2xl:mb-6">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white mb-3 md:mb-4 lg:mb-5 xl:mb-6">
           Historias de éxito de <span className="text-primary">equipos reales</span>
         </h1>
-        <p className="text-lg 2xl:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl 2xl:max-w-4xl mx-auto">
+        <p className="text-sm md:text-lg lg:text-xl xl:text-2xl text-gray-600 dark:text-gray-300 max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4">
           Miles de equipos confían en nuestra plataforma para organizar su trabajo y lograr más.
         </p>
       </div>
 
       {/* Carousel */}
-      <div className="relative max-w-5xl 2xl:max-w-7xl mx-auto mb-16 2xl:mb-24">
-        <div className="relative overflow-hidden rounded-2xl 2xl:rounded-3xl">
+      <div className="relative max-w-4xl md:max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto mb-10 md:mb-16 lg:mb-20 xl:mb-24">
+        <div className="relative overflow-hidden rounded-xl md:rounded-2xl lg:rounded-3xl">
           <div
             className="flex transition-transform duration-500 ease-out"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="w-full flex-shrink-0 px-4 2xl:px-8">
-                <div className="bg-white dark:bg-gray-800/80 backdrop-blur-xl border border-gray-200 dark:border-gray-700/50 rounded-2xl 2xl:rounded-3xl p-10 2xl:p-16 text-center shadow-xl shadow-gray-200/50 dark:shadow-black/20">
-                  <div className="flex items-center justify-center gap-1 mb-4 2xl:mb-6">
+              <div key={index} className="w-full flex-shrink-0 px-2 md:px-4 lg:px-6 xl:px-8">
+                <div className="bg-white dark:bg-gray-800/80 backdrop-blur-xl border border-gray-200 dark:border-gray-700/50 rounded-xl md:rounded-2xl lg:rounded-3xl p-6 md:p-10 lg:p-14 xl:p-16 text-center shadow-xl shadow-gray-200/50 dark:shadow-black/20">
+                  <div className="flex items-center justify-center gap-1 mb-3 md:mb-4 lg:mb-5 xl:mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 2xl:w-8 2xl:h-8 fill-yellow-400 text-yellow-400" />
+                      <Star key={i} className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8 fill-yellow-400 text-yellow-400" />
                     ))}
                   </div>
-                  <Quote className="w-12 h-12 2xl:w-20 2xl:h-20 text-primary/20 mx-auto mb-6 2xl:mb-10" />
-                  <p className="text-xl 2xl:text-3xl text-gray-700 dark:text-gray-200 leading-relaxed mb-8 2xl:mb-12 italic font-light">
+                  <Quote className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 xl:w-20 xl:h-20 text-primary/20 mx-auto mb-4 md:mb-6 lg:mb-8 xl:mb-10" />
+                  <p className="text-base md:text-xl lg:text-2xl xl:text-3xl text-gray-700 dark:text-gray-200 leading-relaxed mb-6 md:mb-8 lg:mb-10 xl:mb-12 italic font-light">
                     &ldquo;{testimonial.text}&rdquo;
                   </p>
-                  <div className="flex items-center justify-center gap-4 2xl:gap-6">
+                  <div className="flex items-center justify-center gap-3 md:gap-4 lg:gap-5 xl:gap-6">
                     <img
                       src={testimonial.avatar}
                       alt={testimonial.name}
-                      className="w-14 h-14 2xl:w-24 2xl:h-24 rounded-full object-cover ring-4 2xl:ring-8 ring-white dark:ring-gray-700 shadow-lg"
+                      className="w-10 h-10 md:w-14 md:h-14 lg:w-20 lg:h-20 xl:w-24 xl:h-24 rounded-full object-cover ring-2 md:ring-4 lg:ring-6 xl:ring-8 ring-white dark:ring-gray-700 shadow-lg"
                     />
                     <div className="text-left">
-                      <p className="font-semibold text-gray-900 dark:text-white text-lg 2xl:text-2xl">{testimonial.name}</p>
-                      <p className="text-sm 2xl:text-lg text-gray-500 dark:text-gray-400">{testimonial.role}</p>
-                      <p className="text-sm 2xl:text-lg text-primary font-medium">{testimonial.company}</p>
+                      <p className="font-semibold text-gray-900 dark:text-white text-sm md:text-lg lg:text-xl xl:text-2xl">{testimonial.name}</p>
+                      <p className="text-xs md:text-sm lg:text-base xl:text-lg text-gray-500 dark:text-gray-400">{testimonial.role}</p>
+                      <p className="text-xs md:text-sm lg:text-base xl:text-lg text-primary font-medium">{testimonial.company}</p>
                     </div>
                   </div>
                 </div>
@@ -120,30 +120,30 @@ function Testimonios() {
           {/* Navigation Arrows */}
           <button
             onClick={prev}
-            className="absolute left-2 2xl:left-6 top-1/2 -translate-y-1/2 p-3 2xl:p-5 rounded-full bg-white dark:bg-gray-800 shadow-lg text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white transition-all duration-200"
+            className="absolute left-1 md:left-2 lg:left-4 xl:left-6 top-1/2 -translate-y-1/2 p-2 md:p-3 lg:p-4 xl:p-5 rounded-full bg-white dark:bg-gray-800 shadow-lg text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white transition-all duration-200"
             aria-label="Anterior"
           >
-            <ChevronLeft className="w-5 h-5 2xl:w-8 2xl:h-8" />
+            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-8 xl:h-8" />
           </button>
           <button
             onClick={next}
-            className="absolute right-2 2xl:right-6 top-1/2 -translate-y-1/2 p-3 2xl:p-5 rounded-full bg-white dark:bg-gray-800 shadow-lg text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white transition-all duration-200"
+            className="absolute right-1 md:right-2 lg:right-4 xl:right-6 top-1/2 -translate-y-1/2 p-2 md:p-3 lg:p-4 xl:p-5 rounded-full bg-white dark:bg-gray-800 shadow-lg text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white transition-all duration-200"
             aria-label="Siguiente"
           >
-            <ChevronRight className="w-5 h-5 2xl:w-8 2xl:h-8" />
+            <ChevronRight className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:w-6 xl:w-8 xl:h-8" />
           </button>
         </div>
 
         {/* Dots */}
-        <div className="flex justify-center gap-3 2xl:gap-4 mt-8 2xl:mt-12">
+        <div className="flex justify-center gap-2 md:gap-3 lg:gap-4 mt-6 md:mt-8 lg:mt-10 xl:mt-12">
           {testimonials.map((_, index) => (
             <button
               key={index}
               onClick={() => goTo(index)}
-              className={`w-3 h-3 2xl:w-5 2xl:h-5 rounded-full transition-all duration-300 ${
+              className={`rounded-full transition-all duration-300 ${
                 currentIndex === index
-                  ? 'bg-primary scale-125 shadow-lg shadow-primary/30 ring-2 ring-primary ring-offset-2 ring-offset-gray-50 dark:ring-offset-gray-900'
-                  : 'bg-gray-300 dark:bg-gray-600 hover:bg-primary/50 ring-0'
+                  ? 'w-3.5 h-3.5 md:w-4 md:h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6 bg-primary ring-[2px] md:ring-[3px] ring-gray-900/25 dark:ring-white shadow-md shadow-primary/40'
+                  : 'w-2.5 h-2.5 md:w-3 md:h-3 lg:w-4 lg:h-4 xl:w-5 xl:h-5 bg-gray-400 dark:bg-gray-500 hover:bg-primary/70'
               }`}
               aria-label={`Ir al testimonio ${index + 1}`}
             />
@@ -152,22 +152,22 @@ function Testimonios() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 2xl:gap-10">
-        <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-2xl 2xl:rounded-3xl p-8 2xl:p-12 text-center hover:shadow-lg transition-shadow">
-          <div className="text-4xl 2xl:text-6xl font-bold text-primary mb-2 2xl:mb-4">10,000+</div>
-          <div className="text-gray-500 dark:text-gray-400 font-medium 2xl:text-xl">Equipos activos</div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8 xl:gap-10">
+        <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-xl md:rounded-2xl lg:rounded-3xl p-4 md:p-8 lg:p-10 xl:p-12 text-center hover:shadow-lg transition-shadow">
+          <div className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-primary mb-1 md:mb-2 lg:mb-3 xl:mb-4">10,000+</div>
+          <div className="text-xs md:text-base lg:text-lg xl:text-xl text-gray-500 dark:text-gray-400 font-medium">Equipos activos</div>
         </div>
-        <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-2xl 2xl:rounded-3xl p-8 2xl:p-12 text-center hover:shadow-lg transition-shadow">
-          <div className="text-4xl 2xl:text-6xl font-bold text-primary mb-2 2xl:mb-4">99.9%</div>
-          <div className="text-gray-500 dark:text-gray-400 font-medium 2xl:text-xl">Uptime garantizado</div>
+        <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-xl md:rounded-2xl lg:rounded-3xl p-4 md:p-8 lg:p-10 xl:p-12 text-center hover:shadow-lg transition-shadow">
+          <div className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-primary mb-1 md:mb-2 lg:mb-3 xl:mb-4">99.9%</div>
+          <div className="text-xs md:text-base lg:text-lg xl:text-xl text-gray-500 dark:text-gray-400 font-medium">Uptime garantizado</div>
         </div>
-        <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-2xl 2xl:rounded-3xl p-8 2xl:p-12 text-center hover:shadow-lg transition-shadow">
-          <div className="text-4xl 2xl:text-6xl font-bold text-primary mb-2 2xl:mb-4">50M+</div>
-          <div className="text-gray-500 dark:text-gray-400 font-medium 2xl:text-xl">Proyectos creados</div>
+        <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-xl md:rounded-2xl lg:rounded-3xl p-4 md:p-8 lg:p-10 xl:p-12 text-center hover:shadow-lg transition-shadow">
+          <div className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-primary mb-1 md:mb-2 lg:mb-3 xl:mb-4">50M+</div>
+          <div className="text-xs md:text-base lg:text-lg xl:text-xl text-gray-500 dark:text-gray-400 font-medium">Proyectos creados</div>
         </div>
-        <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-2xl 2xl:rounded-3xl p-8 2xl:p-12 text-center hover:shadow-lg transition-shadow">
-          <div className="text-4xl 2xl:text-6xl font-bold text-primary mb-2 2xl:mb-4">4.9/5</div>
-          <div className="text-gray-500 dark:text-gray-400 font-medium 2xl:text-xl">Calificación media</div>
+        <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-xl md:rounded-2xl lg:rounded-3xl p-4 md:p-8 lg:p-10 xl:p-12 text-center hover:shadow-lg transition-shadow">
+          <div className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-primary mb-1 md:mb-2 lg:mb-3 xl:mb-4">4.9/5</div>
+          <div className="text-xs md:text-base lg:text-lg xl:text-xl text-gray-500 dark:text-gray-400 font-medium">Calificación media</div>
         </div>
       </div>
     </div>
