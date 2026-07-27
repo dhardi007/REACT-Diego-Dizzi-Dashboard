@@ -1,7 +1,7 @@
 // Dashboard.jsx - Simple Project Dashboard
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, FolderOpen, Edit, Trash2, Star, Clock, CheckCircle, Search, MoreHorizontal, ArrowRight, ExternalLink, Heart, Code, Zap, Globe, Layers, GitBranch, Database, Server, Cloud, Mail, Users, Settings, Shield, BarChart2, TrendingUp, TrendingDown, Minus, Plus as PlusIcon, Filter, Menu, X, Eye, MessageSquare, Download, Upload, Share2 } from 'lucide-react';
+import { Plus, FolderOpen, Edit, Trash2, Star, Clock, CheckCircle, Search, MoreHorizontal, ArrowRight, ExternalLink, Heart, Code, Zap, Globe, Layers, GitBranch, Database, Server, Cloud, Mail, Users, Settings, Shield, BarChart2, TrendingUp, TrendingDown, Minus, Plus as PlusIcon, Filter, Menu, X, Eye, MessageSquare, Download, Upload, Share2, Github, Link2 } from 'lucide-react';
 
 const initialProjects = [
   {
@@ -95,6 +95,8 @@ function Dashboard() {
     description: '',
     tags: '',
     status: 'draft',
+    link: '',
+    live: '',
   });
 
   useEffect(() => {
@@ -122,7 +124,8 @@ function Dashboard() {
       progress: newProject.status === 'completed' ? 100 : newProject.status === 'draft' ? 0 : 10,
       updated: 'Just now',
       starred: false,
-      link: '#',
+      link: newProject.link.trim() || '#',
+      live: newProject.live.trim() || null,
     };
     
     setProjects([project, ...projects]);
@@ -148,6 +151,8 @@ function Dashboard() {
       description: project.description,
       tags: project.tags,
       status: project.status,
+      link: project.link === '#' ? '' : project.link,
+      live: project.live || '',
     });
     setShowCreateModal(true);
   };
@@ -165,7 +170,7 @@ function Dashboard() {
   };
 
   const resetForm = () => {
-    setNewProject({ name: '', description: '', tags: '', status: 'draft' });
+    setNewProject({ name: '', description: '', tags: '', status: 'draft', link: '', live: '' });
     setEditingProject(null);
     setShowCreateModal(false);
   };
@@ -332,6 +337,102 @@ function Dashboard() {
                 </article>
               );
             })}
+        </div>
+      )}
+
+      {/* Create/Edit Modal */}
+      {showCreateModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={resetForm} />
+          <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 w-full max-w-lg animate-scale-in overflow-hidden">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-700">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                {editingProject ? 'Editar Proyecto' : 'Nuevo Proyecto'}
+              </h2>
+              <button onClick={resetForm} className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <form onSubmit={editingProject ? handleUpdate : handleCreate} className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nombre *</label>
+                <input
+                  type="text"
+                  value={newProject.name}
+                  onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
+                  className="input"
+                  placeholder="Mi Proyecto"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descripción</label>
+                <textarea
+                  value={newProject.description}
+                  onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
+                  className="input min-h-[80px] resize-none"
+                  placeholder="Describe tu proyecto..."
+                  rows="3"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tags (separados por coma)</label>
+                <input
+                  type="text"
+                  value={newProject.tags}
+                  onChange={(e) => setNewProject({ ...newProject, tags: e.target.value })}
+                  className="input"
+                  placeholder="React, Node.js, MongoDB"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Estado</label>
+                <select
+                  value={newProject.status}
+                  onChange={(e) => setNewProject({ ...newProject, status: e.target.value })}
+                  className="input"
+                >
+                  <option value="active">En progreso</option>
+                  <option value="completed">Completado</option>
+                  <option value="draft">Borrador</option>
+                  <option value="review">En revisión</option>
+                  <option value="paused">Pausado</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <Code className="w-4 h-4 inline mr-1" />
+                  Repositorio (URL)
+                </label>
+                <input
+                  type="url"
+                  value={newProject.link}
+                  onChange={(e) => setNewProject({ ...newProject, link: e.target.value })}
+                  className="input"
+                  placeholder="https://github.com/user/repo"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                  <Globe className="w-4 h-4 inline mr-1" />
+                  Live demo (opcional)
+                </label>
+                <input
+                  type="url"
+                  value={newProject.live}
+                  onChange={(e) => setNewProject({ ...newProject, live: e.target.value })}
+                  className="input"
+                  placeholder="https://mi-app.vercel.app"
+                />
+              </div>
+              <div className="flex items-center gap-3 pt-2">
+                <button type="button" onClick={resetForm} className="btn-ghost flex-1">Cancelar</button>
+                <button type="submit" className="btn-primary flex-1">
+                  {editingProject ? 'Guardar cambios' : 'Crear proyecto'}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </div>
