@@ -81,7 +81,8 @@ export function LoginPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin@dashboard.com"
                     disabled={isLoading}
-                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30 pl-10"
+                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30"
+                    style={{ paddingLeft: '2.5rem' }}
                   />
                 </div>
               </div>
@@ -106,7 +107,8 @@ export function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     disabled={isLoading}
-                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30 pl-10"
+                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30"
+                    style={{ paddingLeft: '2.5rem' }}
                   />
                 </div>
               </div>

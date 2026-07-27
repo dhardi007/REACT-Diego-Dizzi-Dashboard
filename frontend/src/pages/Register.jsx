@@ -135,6 +135,7 @@ export function RegisterPage() {
                     required
                     autoComplete="name"
                     className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30"
+                    style={{ paddingLeft: '2.5rem' }}
                   />
                 </div>
               </div>
@@ -153,6 +154,7 @@ export function RegisterPage() {
                     required
                     autoComplete="email"
                     className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30"
+                    style={{ paddingLeft: '2.5rem' }}
                   />
                 </div>
               </div>
@@ -171,6 +173,7 @@ export function RegisterPage() {
                     required
                     autoComplete="new-password"
                     className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30"
+                    style={{ paddingLeft: '2.5rem' }}
                   />
                   <button
                     type="button"
@@ -211,6 +214,7 @@ export function RegisterPage() {
                     required
                     autoComplete="new-password"
                     className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30"
+                    style={{ paddingLeft: '2.5rem' }}
                   />
                   <button
                     type="button"
