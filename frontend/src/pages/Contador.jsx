@@ -1,17 +1,39 @@
 // Contador.jsx - Beautiful Counter
 import { useState } from 'react';
-import { Plus, Minus, RotateCcw, Heart, Zap, Sparkles, History } from 'lucide-react';
+import { Plus, Minus, RotateCcw, Heart, Zap, Sparkles, History, Trophy, Star, Flame, Award } from 'lucide-react';
+import { useNotifications } from '../context/NotificationContext';
+
+const MILESTONE_CONFIG = [
+  { value: 10, icon: 'Star', color: 'text-amber-500', label: 'Primeros pasos' },
+  { value: 25, icon: 'Zap', color: 'text-yellow-500', label: '¡A toda máquina!' },
+  { value: 50, icon: 'Flame', color: 'text-orange-500', label: '¡Imparable!' },
+  { value: 100, icon: 'Trophy', color: 'text-yellow-500', label: 'Centenario' },
+  { value: 250, icon: 'Award', color: 'text-purple-500', label: '¡Leyenda!' },
+  { value: 500, icon: 'Flame', color: 'text-red-500', label: '¡En llamas!' },
+  { value: 1000, icon: 'Trophy', color: 'text-yellow-500', label: 'Miles de clicks' },
+  { value: 2500, icon: 'Award', color: 'text-pink-500', label: 'Dios del clic' },
+  { value: 5000, icon: 'Flame', color: 'text-red-600', label: 'Infernal' },
+  { value: 10000, icon: 'Trophy', color: 'text-yellow-500', label: '10K CLICKS' },
+  { value: 100000, icon: 'Award', color: 'text-purple-600', label: '100K — Leyenda Suprema' },
+  { value: 1000000, icon: 'Flame', color: 'text-red-600', label: '¡MILLÓN! — Eres una máquina' },
+];
 
 function Contador() {
   const [count, setCount] = useState(0);
   const [history, setHistory] = useState([]);
   const [milestone, setMilestone] = useState(null);
+  const { addNotification } = useNotifications();
 
   const checkMilestone = (newCount) => {
-    const milestones = [10, 25, 50, 100, 250, 500, 1000];
-    if (milestones.includes(newCount)) {
-      setMilestone(newCount);
+    const config = MILESTONE_CONFIG.find(m => m.value === newCount);
+    if (config) {
+      setMilestone({ value: newCount, ...config });
       setTimeout(() => setMilestone(null), 3000);
+      addNotification({
+        icon: config.icon,
+        text: `🎯 ${config.label} — ${newCount.toLocaleString()} clicks alcanzados`,
+        color: config.color,
+      });
     }
   };
 
@@ -54,8 +76,8 @@ function Contador() {
                 <Zap className="w-5 h-5" />
               </div>
               <div>
-                <p className="font-bold text-lg">¡Logro desbloqueado!</p>
-                <p className="text-sm opacity-90">{milestone} clicks alcanzados</p>
+                <p className="font-bold text-lg">¡{milestone.label}!</p>
+                <p className="text-sm opacity-90">{milestone.value.toLocaleString()} clicks alcanzados</p>
               </div>
             </div>
           </div>
@@ -166,7 +188,7 @@ function Contador() {
                   <li>• Usa <kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">Espacio</kbd> o <kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">Enter</kbd> para incrementar</li>
                   <li>• Usa <kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">-</kbd> o <kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">Backspace</kbd> para decrementar</li>
                   <li>• Presiona <kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">R</kbd> para reiniciar</li>
-                  <li>• Hits: 10, 25, 50, 100, 250, 500, 1000</li>
+                  <li>• Hits: 10, 25, 50, 100, 250, 500, 1K, 2.5K, 5K, 10K, 100K, 1M</li>
                 </ul>
               </div>
             </div>

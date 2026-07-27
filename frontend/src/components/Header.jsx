@@ -1,20 +1,18 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Bell, Sun, Moon, LogOut, Menu, X, Zap, CheckCircle, Info } from 'lucide-react';
+import { Bell, Sun, Moon, LogOut, Menu, X, CheckCircle, Info, Zap, Trophy, Star, Flame, Award } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useNotifications } from '../context/NotificationContext';
+
+const ICON_MAP = {
+  CheckCircle, Info, Zap, Trophy, Star, Flame, Award,
+};
 
 function Header({ dark, toggleTheme, toggleSideMenu }) {
   const { user, logout } = useAuth();
+  const { notifications, markAllRead } = useNotifications();
   const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = useState(false);
-  const [notifications, setNotifications] = useState([
-    { icon: CheckCircle, text: 'Sesión iniciada correctamente', time: 'Ahora', color: 'text-green-500', read: false },
-    { icon: Info, text: 'Dashboard cargado con éxito', time: 'Hace 1 min', color: 'text-blue-500', read: false },
-  ]);
-
-  const markAllRead = () => {
-    setNotifications(notifications.map(n => ({ ...n, read: true })));
-  };
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
@@ -81,7 +79,7 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
                   </div>
                   <div className="max-h-64 overflow-y-auto">
                     {notifications.map((n, i) => {
-                      const Icon = n.icon;
+                      const Icon = ICON_MAP[n.icon] || CheckCircle;
                       return (
                         <div key={i} className="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
                           <div className={`mt-0.5 ${n.color}`}>
