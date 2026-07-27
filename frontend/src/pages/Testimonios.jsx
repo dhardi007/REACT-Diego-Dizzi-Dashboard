@@ -154,19 +154,19 @@ function Testimonios() {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow">
-          <div className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">10,000+</div>
+          <div className="text-4xl font-bold text-primary mb-2">10,000+</div>
           <div className="text-gray-500 dark:text-gray-400 font-medium">Equipos activos</div>
         </div>
         <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow">
-          <div className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">99.9%</div>
+          <div className="text-4xl font-bold text-primary mb-2">99.9%</div>
           <div className="text-gray-500 dark:text-gray-400 font-medium">Uptime garantizado</div>
         </div>
         <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow">
-          <div className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">50M+</div>
+          <div className="text-4xl font-bold text-primary mb-2">50M+</div>
           <div className="text-gray-500 dark:text-gray-400 font-medium">Proyectos creados</div>
         </div>
         <div className="bg-white dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-2xl p-8 text-center hover:shadow-lg transition-shadow">
-          <div className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">4.9/5</div>
+          <div className="text-4xl font-bold text-primary mb-2">4.9/5</div>
           <div className="text-gray-500 dark:text-gray-400 font-medium">Calificación media</div>
         </div>
       </div>

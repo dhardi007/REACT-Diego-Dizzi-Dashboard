@@ -7,16 +7,16 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = useState(false);
+  const [notifications, setNotifications] = useState([
+    { icon: CheckCircle, text: 'Sesión iniciada correctamente', time: 'Ahora', color: 'text-green-500', read: false },
+    { icon: Info, text: 'Dashboard cargado con éxito', time: 'Hace 1 min', color: 'text-blue-500', read: false },
+  ]);
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
+  const markAllRead = () => {
+    setNotifications(notifications.map(n => ({ ...n, read: true })));
   };
 
-  const notifications = [
-    { icon: CheckCircle, text: 'Sesión iniciada correctamente', time: 'Ahora', color: 'text-green-500' },
-    { icon: Info, text: 'Dashboard cargado con éxito', time: 'Hace 1 min', color: 'text-blue-500' },
-  ];
+  const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
     <header className="z-10 py-3 bg-white dark:bg-[#0d081d] border-b border-gray-200/50 dark:border-white/[0.06]">
@@ -41,7 +41,7 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
               onClick={toggleTheme}
               aria-label="Toggle color mode"
             >
-              {dark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {dark ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
             </button>
           </li>
 
@@ -52,7 +52,11 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
               aria-label="Notifications"
             >
               <Bell className="w-5 h-5" />
-              <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-red-500 rounded-full ring-2 ring-white dark:ring-[#0d081d]" />
+              {unreadCount > 0 && (
+                <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-white text-[10px] font-bold ring-2 ring-white dark:ring-[#0d081d]">
+                  {unreadCount}
+                </span>
+              )}
             </button>
 
             {showNotifications && (
@@ -61,9 +65,14 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
                 <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 z-20 animate-scale-in overflow-hidden">
                   <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-700">
                     <span className="text-sm font-semibold text-gray-900 dark:text-white">Notificaciones</span>
-                    <button onClick={() => setShowNotifications(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                      <X className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      {unreadCount > 0 && (
+                        <button onClick={markAllRead} className="text-xs text-primary hover:text-primary/80 font-medium">Marcar leídas</button>
+                      )}
+                      <button onClick={() => setShowNotifications(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                   <div className="max-h-64 overflow-y-auto">
                     {notifications.map((n, i) => {
