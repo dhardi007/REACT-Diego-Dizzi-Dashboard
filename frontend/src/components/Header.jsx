@@ -18,6 +18,11 @@ function Header({ dark, toggleTheme, toggleSideMenu }) {
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <header className="z-10 py-3 bg-white dark:bg-[#0d081d] border-b border-gray-200/50 dark:border-white/[0.06]">
       <div className="container flex items-center justify-between h-full px-6 mx-auto">
