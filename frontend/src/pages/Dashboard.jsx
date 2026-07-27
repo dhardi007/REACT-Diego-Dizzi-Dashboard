@@ -262,15 +262,13 @@ function Dashboard() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-2">
                           <h3 className="font-semibold text-gray-900 dark:text-white truncate">{project.name}</h3>
-                          {project.starred && (
-                            <button
-                              onClick={(e) => { e.stopPropagation(); handleStar(project.id); }}
-                              className="text-yellow-500 hover:scale-110 transition-transform"
-                              aria-label="Desmarcar favorito"
-                            >
-                              <Star className="w-5 h-5 fill-current" />
-                            </button>
-                          )}
+                          <button
+                            onClick={(e) => { e.stopPropagation(); handleStar(project.id); }}
+                            className={`${project.starred ? 'text-yellow-500' : 'text-gray-300 dark:text-gray-600'} hover:text-yellow-500 hover:scale-110 transition-all`}
+                            aria-label={project.starred ? 'Desmarcar favorito' : 'Marcar favorito'}
+                          >
+                            <Star className={`w-5 h-5 ${project.starred ? 'fill-current' : ''}`} />
+                          </button>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">{project.description}</p>
                       </div>
