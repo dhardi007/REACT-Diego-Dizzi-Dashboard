@@ -71,6 +71,30 @@ const initialProjects = [
     starred: true,
     link: 'https://github.com/dizzi1222',
   },
+  {
+    id: 7,
+    name: 'Marketplace de Talentos - CIC',
+    description: 'Marketplace de talento para Cincinnatus Institute. MVP con autenticación, catálogo, watch list y panel admin.',
+    tags: 'React, Node.js, PostgreSQL, Docker, Figma, TypeScript, Material UI',
+    status: 'active',
+    progress: 70,
+    updated: '3 days ago',
+    starred: true,
+    link: 'https://github.com/dizzi1222',
+    live: 'https://ptd-talento-frontend-dev-dot-cic-ptd-dev.ue.r.appspot.com/Inicio',
+  },
+  {
+    id: 8,
+    name: 'PCE Agencia - Agencia de Viajes',
+    description: 'App de finanzas y viajes — gestión de presupuestos, planificación de itinerarios y seguimiento de gastos.',
+    tags: 'JavaScript, HTML, CSS, TypeScript, Tailwind, Docker',
+    status: 'active',
+    progress: 50,
+    updated: '1 week ago',
+    starred: false,
+    link: 'https://github.com/dizzi1222',
+    live: 'https://pce-agencia.vercel.app',
+  },
 ];
 
 const statusConfig = {
