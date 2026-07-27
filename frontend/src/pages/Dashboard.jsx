@@ -13,7 +13,7 @@ const initialProjects = [
     progress: 75,
     updated: '2 hours ago',
     starred: true,
-    link: 'https://github.com',
+    link: 'https://portfolio-terminal-dhardi.vercel.app',
   },
   {
     id: 2,
@@ -24,7 +24,7 @@ const initialProjects = [
     progress: 45,
     updated: '1 day ago',
     starred: false,
-    link: 'https://github.com',
+    link: 'https://github.com/dizzi1222',
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const initialProjects = [
     progress: 100,
     updated: '3 days ago',
     starred: true,
-    link: 'https://github.com',
+    link: 'https://github.com/dizzi1222',
   },
   {
     id: 4,
@@ -46,7 +46,7 @@ const initialProjects = [
     progress: 20,
     updated: '1 week ago',
     starred: false,
-    link: 'https://github.com',
+    link: 'https://github.com/dizzi1222',
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ const initialProjects = [
     progress: 60,
     updated: '5 hours ago',
     starred: false,
-    link: 'https://github.com',
+    link: 'https://github.com/dizzi1222',
   },
   {
     id: 6,
@@ -68,7 +68,7 @@ const initialProjects = [
     progress: 85,
     updated: '2 days ago',
     starred: true,
-    link: 'https://github.com',
+    link: 'https://github.com/dizzi1222',
   },
 ];
 
