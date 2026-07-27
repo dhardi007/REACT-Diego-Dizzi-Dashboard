@@ -240,7 +240,7 @@ function Dashboard() {
           <p className="text-gray-500 dark:text-gray-400">Intenta cambiar los filtros o la búsqueda</p>
         </div>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {projects
             .filter(p => filteredProjects.includes(p))
             .sort((a, b) => (b.starred === a.starred ? 0 : b.starred ? 1 : -1) || b.id - a.id)
@@ -251,10 +251,10 @@ function Dashboard() {
                   key={project.id}
                   className="card group animate-slide-up bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-primary-500/50"
                 >
-                  <div className="p-5">
-                    <div className="flex items-start justify-between mb-3">
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-4">
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="flex items-center gap-2 mb-2">
                           <h3 className="font-semibold text-gray-900 dark:text-white truncate">{project.name}</h3>
                           {project.starred && (
                             <button
@@ -295,8 +295,8 @@ function Dashboard() {
                     </div>
                   </div>
                   
-                  <div className="px-5 pb-5 pt-0 border-t border-gray-100 dark:border-gray-700">
-                    <div className="mb-3">
+                  <div className="px-6 pb-6 pt-0 border-t border-gray-100 dark:border-gray-700">
+                    <div className="mb-4">
                       <div className="flex items-center justify-between text-xs mb-1">
                         <span className="text-gray-500 dark:text-gray-400">Progreso</span>
                         <span className="font-medium text-gray-900 dark:text-white">{project.progress}%</span>
@@ -308,7 +308,7 @@ function Dashboard() {
                         />
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                       <button className="btn-ghost btn-sm text-xs flex-1" onClick={(e) => { e.stopPropagation(); window.open(project.link, '_blank'); }}>
                         <ExternalLink className="w-3.5 h-3.5 mr-1" />
                         Ver código
