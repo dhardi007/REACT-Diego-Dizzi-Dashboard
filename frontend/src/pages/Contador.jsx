@@ -1,6 +1,6 @@
 // Contador.jsx - Beautiful Counter
 import { useState } from 'react';
-import { Plus, Minus, RotateCcw, Heart, Zap, Sparkles } from 'lucide-react';
+import { Plus, Minus, RotateCcw, Heart, Zap, Sparkles, History } from 'lucide-react';
 
 function Contador() {
   const [count, setCount] = useState(0);
@@ -34,15 +34,15 @@ function Contador() {
   };
 
   return (
-    <div className="max-w-md mx-auto animate-fade-in">
+    <div className="max-w-lg mx-auto animate-fade-in">
       {/* Header */}
-      <div className="text-center mb-8 animate-slide-up">
+      <div className="text-center mb-10 animate-slide-up">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
           <Zap className="w-4 h-4 animate-pulse" />
           Contador Interactivo
         </div>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Contador Inteligente</h1>
-        <p className="text-gray-600 dark:text-gray-400">Simple, elegante y con historial</p>
+        <p className="text-gray-600 dark:text-gray-400">Toca el círculo para contar</p>
       </div>
 
       {/* Milestone Toast */}
@@ -63,28 +63,28 @@ function Contador() {
       )}
 
       {/* Main Counter Display */}
-      <div className="relative mb-8 animate-scale-in">
-        <div className="relative w-56 h-56 mx-auto">
+      <div className="relative mb-10 animate-scale-in">
+        <div className="relative w-64 h-64 mx-auto cursor-pointer group" onClick={increment}>
           {/* Background rings */}
-          <svg className="absolute inset-0 -z-10" viewBox="0 0 224 224">
+          <svg className="absolute inset-0 -z-10" viewBox="0 0 256 256">
             <circle
-              cx="112"
-              cy="112"
-              r="100"
+              cx="128"
+              cy="128"
+              r="114"
               fill="none"
               stroke="currentColor"
               strokeWidth="8"
               className="text-gray-100 dark:text-gray-800"
             />
             <circle
-              cx="112"
-              cy="112"
-              r="100"
+              cx="128"
+              cy="128"
+              r="114"
               fill="none"
               stroke="currentColor"
               strokeWidth="8"
-              strokeDasharray="628"
-              strokeDashoffset={`${628 * (1 - Math.min(count / 100, 1))}`}
+              strokeDasharray="716"
+              strokeDashoffset={`${716 * (1 - Math.min(count / 100, 1))}`}
               strokeLinecap="round"
               className="text-primary transition-all duration-500 ease-out"
               style={{ transform: 'rotate(-90deg)', transformOrigin: 'center' }}
@@ -93,11 +93,14 @@ function Contador() {
           
           {/* Center content */}
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white font-mono tabular-nums animate-pulse-soft">
+            <span className="text-6xl md:text-7xl font-bold text-gray-900 dark:text-white font-mono tabular-nums group-hover:scale-110 transition-transform duration-200">
               {count}
             </span>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 font-medium">clicks</p>
           </div>
+
+          {/* Click ripple effect */}
+          <div className="absolute inset-0 rounded-full bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
         </div>
         
         {/* Floating particles on milestone */}
@@ -205,7 +208,7 @@ function Contador() {
       )}
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 animate-slide-up stagger-3">
+      <div className="grid grid-cols-3 gap-4 mb-10 animate-slide-up stagger-3">
         <div className="card p-4 text-center">
           <p className="text-2xl font-bold text-primary">{count}</p>
           <p className="text-xs text-gray-500 dark:text-gray-400">Total actual</p>
@@ -221,7 +224,7 @@ function Contador() {
       </div>
 
       {/* Tips */}
-      <div className="mt-8 card p-4 bg-gradient-to-r from-primary/5 to-accent/5 border-primary/10 dark:border-primary/20">
+      <div className="card p-5 bg-gradient-to-r from-primary/5 to-accent/5 border-primary/10 dark:border-primary/20">
         <div className="flex items-start gap-3">
           <Sparkles className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
           <div>

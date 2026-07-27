@@ -39,7 +39,7 @@ function Layout() {
             to="/"
             className="ml-6 text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent hover:from-purple-500 hover:to-pink-500 transition-all inline-block"
           >
-            DIZZI DASHBOARD
+            dizzi dashboard
           </Link>
           <ul className="mt-8 space-y-1 px-3">
             {navItems.map((item) => {
@@ -84,7 +84,7 @@ function Layout() {
             to="/"
             className="ml-6 text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
           >
-            DIZZI DASHBOARD
+            dizzi dashboard
           </Link>
           <ul className="mt-6 space-y-1 px-3">
             {navItems.map((item) => {
