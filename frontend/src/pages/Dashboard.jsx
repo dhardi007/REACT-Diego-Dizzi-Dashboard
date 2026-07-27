@@ -13,7 +13,8 @@ const initialProjects = [
     progress: 75,
     updated: '2 hours ago',
     starred: true,
-    link: 'https://portfolio-terminal-dhardi.vercel.app',
+    link: 'https://github.com/dizzi1222/portfolio-terminal-dhardi',
+    live: 'https://portfolio-terminal-dhardi.vercel.app',
   },
   {
     id: 2,
@@ -309,8 +310,14 @@ function Dashboard() {
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
+                      {project.live && (
+                        <button className="btn-ghost btn-sm text-xs flex-1" onClick={(e) => { e.stopPropagation(); window.open(project.live, '_blank'); }}>
+                          <Globe className="w-3.5 h-3.5 mr-1" />
+                          Live
+                        </button>
+                      )}
                       <button className="btn-ghost btn-sm text-xs flex-1" onClick={(e) => { e.stopPropagation(); window.open(project.link, '_blank'); }}>
-                        <ExternalLink className="w-3.5 h-3.5 mr-1" />
+                        <Code className="w-3.5 h-3.5 mr-1" />
                         Ver código
                       </button>
                       <button
