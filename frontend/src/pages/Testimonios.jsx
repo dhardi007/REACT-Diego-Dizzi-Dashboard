@@ -66,7 +66,7 @@ function Testimonios() {
   // }, [autoPlay, currentIndex]);
 
   return (
-    <div className="animate-fade-in max-w-7xl mx-auto px-4 2xl:px-8">
+    <div className="animate-fade-in max-w-7xl mx-auto px-4 2xl:px-8 py-10">
       {/* Header */}
       <div className="mb-12 2xl:mb-20 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-300 text-sm 2xl:text-base font-medium mb-4 2xl:mb-6">
@@ -142,8 +142,8 @@ function Testimonios() {
               onClick={() => goTo(index)}
               className={`w-3 h-3 2xl:w-5 2xl:h-5 rounded-full transition-all duration-300 ${
                 currentIndex === index
-                  ? 'bg-primary scale-125 shadow-lg shadow-primary/30'
-                  : 'bg-gray-300 dark:bg-gray-600 hover:bg-primary/50'
+                  ? 'bg-primary scale-125 shadow-lg shadow-primary/30 ring-2 ring-primary ring-offset-2 ring-offset-gray-50 dark:ring-offset-gray-900'
+                  : 'bg-gray-300 dark:bg-gray-600 hover:bg-primary/50 ring-0'
               }`}
               aria-label={`Ir al testimonio ${index + 1}`}
             />
