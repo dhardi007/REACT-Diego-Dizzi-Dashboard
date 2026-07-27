@@ -81,7 +81,7 @@ export function LoginPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="admin@dashboard.com"
                     disabled={isLoading}
-                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30"
+                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30 pl-10"
                   />
                 </div>
               </div>
@@ -106,16 +106,17 @@ export function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     disabled={isLoading}
-                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30"
+                    className="bg-white/10 border-white/20 text-white placeholder-white/40 focus:border-primary focus:ring-primary/30 pl-10"
                   />
                 </div>
               </div>
 
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="btn-primary w-full btn-lg shadow-xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300"
-              >
+              <div className="text-center mt-8">
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="btn-primary btn-lg px-10 shadow-xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-300"
+                >
                 {isLoading ? (
                   <>
                     <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" viewBox="0 0 24 24">
@@ -128,6 +129,7 @@ export function LoginPage() {
                   'Iniciar Sesión'
                 )}
               </button>
+            </div>
 
               <div className="flex items-center justify-between text-xs text-white/50">
                 <label className="flex items-center gap-2 cursor-pointer">
