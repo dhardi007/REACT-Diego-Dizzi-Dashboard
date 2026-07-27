@@ -108,7 +108,14 @@ const statusConfig = {
 function Dashboard() {
   const [projects, setProjects] = useState(() => {
     const saved = localStorage.getItem('projects');
-    return saved ? JSON.parse(saved) : initialProjects;
+    if (!saved) return initialProjects;
+    const parsed = JSON.parse(saved);
+    const merged = initialProjects.map(ip => {
+      const existing = parsed.find(p => p.id === ip.id);
+      return existing || ip;
+    });
+    const extra = parsed.filter(p => !initialProjects.some(ip => ip.id === p.id));
+    return [...merged, ...extra];
   });
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
