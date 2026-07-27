@@ -80,7 +80,7 @@ const initialProjects = [
     progress: 70,
     updated: '3 days ago',
     starred: true,
-    link: 'https://github.com/dizzi1222',
+    link: 'https://github.com/Cincinnatus-Institute-of-Craftsmanship/ptd-talento-front/tree/dev',
     live: 'https://ptd-talento-frontend-dev-dot-cic-ptd-dev.ue.r.appspot.com/Inicio',
   },
   {
@@ -92,7 +92,7 @@ const initialProjects = [
     progress: 50,
     updated: '1 week ago',
     starred: false,
-    link: 'https://github.com/dizzi1222',
+    link: 'https://github.com/dizzi1222/PCE-Agencia',
     live: 'https://pce-agencia.vercel.app',
   },
 ];
