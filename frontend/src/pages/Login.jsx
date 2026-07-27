@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { Eye, EyeOff, Mail, Lock, AlertCircle, CheckCircle2, Zap, Shield, Users, Globe } from 'lucide-react';
 

@@ -179,7 +179,6 @@ function Tareas() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="input pl-10"
-                placeholder="Buscar tareas..."
               />
             </div>
             <div className="flex items-center gap-2">

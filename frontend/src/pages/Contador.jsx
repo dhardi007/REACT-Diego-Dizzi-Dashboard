@@ -174,7 +174,7 @@ function Contador() {
             <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
               <History className="w-5 h-5 text-primary" />
               Historial reciente
-            </h3>
+          </h3>
             {history.length > 0 && (
               <button
                 onClick={() => setHistory([])}
@@ -185,22 +185,21 @@ function Contador() {
             )}
           </div>
           <div className="space-y-2 max-h-48 overflow-y-auto">
-            {history.length === 0 ? (
+            {history.length === 0 && (
               <p className="text-center text-gray-500 dark:text-gray-400 py-8">No hay historial aún</p>
-            ) : (
-              history.map((entry, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg animate-slide-up stagger-1"
-                  style={{ animationDelay: `${i * 50}ms` }}
-                >
-                  <span className="font-mono text-sm font-medium text-gray-700 dark:text-gray-300">{entry}</span>
-                  <span className="text-xs text-gray-400 dark:text-gray-500">
-                    {new Date().toLocaleTimeString()}
-                  </span>
-                </div>
-              )))
-            </div>
+            )}
+            {history.length > 0 && history.map((entry, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg animate-slide-up stagger-1"
+                style={{ animationDelay: `${i * 50}ms` }}
+              >
+                <span className="font-mono text-sm font-medium text-gray-700 dark:text-gray-300">{entry}</span>
+                <span className="text-xs text-gray-400 dark:text-gray-500">
+                  {new Date().toLocaleTimeString()}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       )}

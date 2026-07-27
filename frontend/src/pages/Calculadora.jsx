@@ -83,7 +83,7 @@ function Calculadora() {
         {/* History toggle */}
         <div className="flex items-center justify-between p-4 border-b border-gray-100 dark:border-gray-800">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Display</p>
+            <span className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Display</span>
             <button
               onClick={() => setShowHistory(!showHistory)}
               className="text-xs text-primary hover:text-primary/80 font-medium flex items-center gap-1"
