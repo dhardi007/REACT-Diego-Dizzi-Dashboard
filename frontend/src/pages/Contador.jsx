@@ -183,7 +183,7 @@ function Contador() {
                 Limpiar
               </button>
             )}
-          </h3>
+          </div>
           <div className="space-y-2 max-h-48 overflow-y-auto">
             {history.length === 0 ? (
               <p className="text-center text-gray-500 dark:text-gray-400 py-8">No hay historial aún</p>
@@ -199,7 +199,7 @@ function Contador() {
                     {new Date().toLocaleTimeString()}
                   </span>
                 </div>
-              ))}
+              )))
             </div>
           </div>
         </div>

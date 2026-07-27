@@ -161,9 +161,6 @@ function Calculadora() {
             </div>
           </div>
         )}
-            </div>
-          </div>
-        }
       </div>
 
       {/* Keypad */}

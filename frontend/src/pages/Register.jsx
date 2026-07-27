@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
-import { Eye, EyeOff, Mail, Lock, User, AlertCircle, CheckCircle2, Zap, Shield, Users, Globe, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, AlertCircle, CheckCircle2, Zap, Shield, Users, Globe, ArrowLeft } from 'lucide-react';
 
 export function RegisterPage() {
   const { register } = useAuth();
@@ -283,7 +283,7 @@ export function RegisterPage() {
                     <p className="text-white/50 text-xs">{f.desc}</p>
                   </div>
                 </div>
-              )}
+              )))}
             </div>
 
             <div className="mt-8 text-center">
